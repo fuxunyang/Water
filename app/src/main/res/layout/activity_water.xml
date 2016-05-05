@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sky="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_toolbar" />
+
+    <include layout="@layout/include_search_card" />
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/darkgray"
+        android:orientation="horizontal"
+        sky:divider="@drawable/action_line_v"
+        sky:showDividers="middle">
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_01" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_02" />
+
+        <TextView
+            style="@style/list_style"
+            android:visibility="gone"
+            android:text="@string/list_03" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_04" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sky.water.ui.widget.MyRecycleView
+            android:id="@id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

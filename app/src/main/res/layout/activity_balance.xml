@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sky="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_toolbar" />
+
+    <include layout="@layout/include_search_card" />
+
+    <RelativeLayout
+        android:id="@+id/layout_balance"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/lightgray"
+        android:visibility="visible">
+
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            android:layout_marginTop="@dimen/margin_4"
+            android:gravity="center"
+            android:paddingRight="@dimen/padding_4"
+            android:text="卡号"
+            android:textColor="@color/red"
+            android:textSize="@dimen/medium" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/padding_4"
+            android:text="此数值仅供参考"
+            android:textColor="@color/red"
+            android:textSize="@dimen/micro" />
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/darkgray"
+        android:orientation="horizontal"
+        sky:divider="@drawable/action_line_v"
+        sky:showDividers="middle">
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_01" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_05" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_06" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_07"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_08"
+            android:visibility="gone" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sky.water.ui.widget.MyRecycleView
+            android:id="@id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

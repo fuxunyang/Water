@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include layout="@layout/activity_toolbar" />
+
+        <com.sky.water.ui.widget.ScrollingTextView
+            android:id="@+id/tv_news_title"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:gravity="center"
+            android:text="标题"
+            android:textSize="@dimen/Xlarge" />
+
+        <TextView
+            android:id="@+id/tv_news_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/margin_16"
+            android:text="2016-01-28"
+            android:textSize="@dimen/medium" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_4"
+            android:background="#0000ff" />
+
+        <TextView
+            android:id="@+id/tv_news_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginLeft="@dimen/margin_16"
+            android:layout_marginRight="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_4"
+            android:text="d"
+            android:textSize="@dimen/medium" />
+    </LinearLayout>
+</ScrollView>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/menu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/ic_menu"
+    android:orientation="vertical"
+    android:weightSum="7">
+
+    <RelativeLayout
+        android:id="@+id/lable_01"
+        style="@style/menu_layout_style"
+        android:tag="@string/lable_01">
+
+        <ImageView
+            android:id="@+id/lable_01_img"
+            style="@style/menu_image_style"
+            android:background="@mipmap/ic_menu_01" />
+
+        <TextView
+            android:id="@+id/lable_01_tv"
+            style="@style/menu_text_style"
+            android:layout_alignLeft="@+id/lable_01_img"
+            android:layout_alignRight="@+id/lable_01_img"
+            android:layout_below="@+id/lable_01_img"
+            android:text="@string/lable_01" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lable_02"
+        style="@style/menu_layout_style"
+        android:tag="@string/lable_02">
+
+        <ImageView
+            android:id="@+id/lable_02_img"
+            style="@style/menu_image_style"
+            android:background="@mipmap/ic_menu_02" />
+
+        <TextView
+            android:id="@+id/lable_02_tv"
+            style="@style/menu_text_style"
+            android:layout_alignLeft="@+id/lable_02_img"
+            android:layout_alignRight="@+id/lable_02_img"
+            android:layout_below="@+id/lable_02_img"
+            android:text="@string/lable_02" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lable_03"
+        style="@style/menu_layout_style"
+        android:tag="@string/lable_03">
+
+        <ImageView
+            android:id="@+id/lable_03_img"
+            style="@style/menu_image_style"
+            android:background="@mipmap/ic_menu_03" />
+
+        <TextView
+            android:id="@+id/lable_03_tv"
+            style="@style/menu_text_style"
+            android:layout_alignLeft="@+id/lable_03_img"
+            android:layout_alignRight="@+id/lable_03_img"
+            android:layout_below="@+id/lable_03_img"
+            android:text="@string/lable_03" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lable_04"
+        style="@style/menu_layout_style"
+        android:tag="@string/lable_04">
+
+        <ImageView
+            android:id="@+id/lable_04_img"
+            style="@style/menu_image_style"
+            android:background="@mipmap/ic_menu_04" />
+
+        <TextView
+            android:id="@+id/lable_04_tv"
+            style="@style/menu_text_style"
+            android:layout_alignLeft="@+id/lable_04_img"
+            android:layout_alignRight="@+id/lable_04_img"
+            android:layout_below="@+id/lable_04_img"
+            android:text="@string/lable_04" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/lable_05"
+        style="@style/menu_layout_style"
+        android:tag="@string/lable_05">
+
+        <ImageView
+            android:id="@+id/lable_05_img"
+            style="@style/menu_image_style"
+            android:background="@mipmap/ic_menu_05" />
+
+        <TextView
+            android:id="@+id/lable_05_tv"
+            style="@style/menu_text_style"
+            android:layout_alignLeft="@+id/lable_05_img"
+            android:layout_alignRight="@+id/lable_05_img"
+            android:layout_below="@+id/lable_05_img"
+            android:text="@string/lable_05" />
+    </RelativeLayout>
+
+
+</LinearLayout>

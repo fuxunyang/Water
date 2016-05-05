@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">农水公众服务</string>
+    <string name="lable_main">首页</string>
+    <string name="lable_login">登录</string>
+
+    <string name="title_refresh">refresh</string>
+    <string name="lable_01">首    页</string>
+    <string name="lable_02">气象信息</string>
+    <string name="lable_03">土壤墒情</string>
+    <string name="lable_04">灌溉水量</string>
+    <string name="lable_05">余额查询</string>
+    <string name="lable_06">农田灌溉</string>
+    <string name="lable_07">农村排水</string>
+    <string name="lable_08">农村供水</string>
+    <string name="lable_09">水环境</string>
+    <string name="lable_10">水土保持</string>
+
+    <string name="lable_11">土壤温度\n(℃)</string>
+    <string name="lable_12">土壤含水率\n(VOL%)</string>
+    <string name="lable_13">折线图</string>
+    <string name="lable_14">新闻</string>
+    <string name="lable_15">土壤温度曲线图</string>
+    <string name="lable_16">土壤含水率曲线图</string>
+
+
+    <string name="list_01">所属区域</string>
+    <string name="list_02">采集时间</string>
+    <string name="list_03">本次用水量</string>
+    <string name="list_04">总用水量</string>
+
+    <string name="list_05">采集时间</string>
+    <string name="list_06">机井名称</string>
+    <string name="list_07">用水量</string>
+    <string name="list_08">用水费用</string>
+
+    <string name="list_09">采集时间</string>
+    <string name="list_10">土壤温度(℃)</string>
+    <string name="list_11">土壤含水率(VOL%)</string>
+    <string name="list_12">10cm</string>
+    <string name="list_13">20cm</string>
+    <string name="list_14">40cm</string>
+
+
+    <!--按钮文字，命名格式为：btn_按钮事件-->
+    <!--标签文字，命名格式为：label_标签文字-->
+    <!--选项卡文字，命名格式为：tab_选项卡文字-->
+    <!--消息框文字，命名格式为：toast_消息-->
+    <string name="toast_exit">再按一次返回键回到桌面</string>
+
+    <!--编辑框的提示文字，命名格式为：hint_提示信息-->
+    <!--图片的描述文字，命名格式为：desc_图片文字-->
+    <!--对话框的文字，命名格式为：dialog_文字-->
+
+    <!--menu的item文字，命名格式为：action_文字-->
+    <string name="action_settings">Settings</string>
+
+    <string name="login">管理者登录</string>
+    <string name="username">用户名</string>
+    <string name="userpass">密码</string>
+    <string name="error_01">账号或密码错误</string>
+    <string name="error_02">登录失败</string>
+    <string name="error_03">请求失败</string>
+    <string name="success">登录成功</string>
+    <string name="down_check">下载失败，请检查网络连接</string>
+    <string name="down_checksd">下载失败，请检查sd卡是否存在</string>
+
+
+</resources>
