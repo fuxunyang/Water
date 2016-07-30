@@ -142,7 +142,7 @@ public class BaseActivity extends AppCompatActivity implements IBase, Toolbar.On
     public void jumpActivity(Context packageContext, Class<?> cls) {
         startActivity(new Intent(packageContext, cls));
         overridePendingTransition(R.anim.in_from_right, R.anim.out_to_left);
-        //overridePendingTransition(R.anim.in_from_up, R.anim.out_to_down);
+        //overridePendingTransition(R.anim.in_from_up, R.anim.out_to_down);w
     }
 
     public void jumpActivity(Context packageContext, Class<?> cls, String name, String value) {

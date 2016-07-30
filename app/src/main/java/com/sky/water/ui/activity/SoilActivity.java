@@ -76,7 +76,7 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         toRefresh();
 
         getArea();
-        bt_temp.setBackgroundResource(R.mipmap.ic_soil_select);
+        bt_temp.setBackgroundResource(R.mipmap.ic_soil_pressed);
     }
 
     private void getArea() {
@@ -183,7 +183,7 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         switch (view.getId()) {
             case R.id.bt_temp:
                 tv_temporwater.setText(getString(R.string.list_10));
-                bt_temp.setBackgroundResource(R.mipmap.ic_soil_select);
+                bt_temp.setBackgroundResource(R.mipmap.ic_soil_pressed);
                 bt_water.setBackgroundResource(R.mipmap.ic_soil_normal);
                 adapter.setTempOrWater(1);
 
@@ -191,7 +191,7 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             case R.id.bt_water:
                 tv_temporwater.setText(getString(R.string.list_11));
                 bt_temp.setBackgroundResource(R.mipmap.ic_soil_normal);
-                bt_water.setBackgroundResource(R.mipmap.ic_soil_select);
+                bt_water.setBackgroundResource(R.mipmap.ic_soil_pressed);
                 adapter.setTempOrWater(2);
                 break;
 

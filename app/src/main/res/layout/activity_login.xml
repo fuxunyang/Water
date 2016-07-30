@@ -76,5 +76,14 @@
             android:background="@mipmap/ic_login_btn"
             android:text="@string/login"
             android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/bt_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_8"
+            android:background="@mipmap/ic_login_btn"
+            android:text="@string/register"
+            android:textColor="@color/white" />
     </LinearLayout>
 </LinearLayout>

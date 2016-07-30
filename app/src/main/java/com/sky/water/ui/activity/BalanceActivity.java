@@ -72,6 +72,7 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
         setToolbar();
         toRefresh();
         balance_01.setVisibility(View.GONE);
+        jumpActivity(this,BindCardActivity.class);
     }
 
     /**

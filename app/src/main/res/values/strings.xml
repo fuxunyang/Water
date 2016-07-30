@@ -63,6 +63,17 @@
     <string name="success">登录成功</string>
     <string name="down_check">下载失败，请检查网络连接</string>
     <string name="down_checksd">下载失败，请检查sd卡是否存在</string>
+    <string name="register">注册</string>
+    <string name="lable_register">注册</string>
+    <string name="register_realname">真实姓名：</string>
+    <string name="register_card">身份证号：</string>
+    <string name="register_name">用户昵称：</string>
+    <string name="register_setpass">设置密码：</string>
+    <string name="register_surepass">确认密码：</string>
+    <string name="register_xiangzhen">所属乡镇：</string>
+    <string name="register_cunzhuang">所属村庄：</string>
+    <string name="register_phone">手机号码：</string>
+    <string name="bindcard">绑定卡号</string>
 
 
 </resources>
