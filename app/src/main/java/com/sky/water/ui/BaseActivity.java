@@ -14,11 +14,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import com.sky.utils.NetworkJudgment;
 import com.sky.water.R;
 import com.sky.water.api.IBase;
 import com.sky.water.common.Constants;
 import com.sky.water.ui.dialog.DialogManager;
-import com.sky.water.utils.NetworkJudgment;
 import com.sky.water.utils.SPUtils;
 import com.sky.water.utils.ToastUtils;
 import com.sky.water.utils.UIHandler;

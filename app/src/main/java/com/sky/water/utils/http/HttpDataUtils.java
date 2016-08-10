@@ -15,6 +15,7 @@ import com.sky.water.model.WeatherEntity;
 import com.sky.water.ui.activity.ErrorLogActivity;
 
 import org.xutils.common.Callback;
+import org.xutils.common.util.LogUtil;
 import org.xutils.ex.HttpException;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -63,6 +64,39 @@ public class HttpDataUtils extends HttpUtilsBase {
         params.addBodyParameter("userName", name);
         params.addBodyParameter("passWord", pass);
         x.http().post(params, new RequestCallBack<String>(callback) {
+            @Override
+            public void onSuccess(String result) {
+                LogUtil.d(result);
+                if (result != null) callback.onSuccessData(result);
+                else callback.onSuccessData(null);
+            }
+        });
+    }
+
+    /**
+     * 注册
+     *
+     * @param TrueName 姓名
+     * @param UserID   身份证号
+     * @param UserName 昵称
+     * @param Pwd      密码
+     * @param AreaID   区域id
+     * @param PHNo     手机
+     * @param callback
+     */
+    public static void tbAppUsersAdd(String TrueName, String UserID, String UserName,
+                                     String Pwd, String AreaID, String PHNo,
+                                     final IDataResultImpl<String> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersAdd");
+        params.addBodyParameter("TrueName", TrueName);
+        params.addBodyParameter("UserID", UserID);
+        params.addBodyParameter("UserName", UserName);
+        params.addBodyParameter("Pwd", Pwd);
+        params.addBodyParameter("AreaID", AreaID);
+        params.addBodyParameter("PHNo", PHNo);
+//        params.setCharset("gbk");
+        x.http().post(params, new RequestCallBack<String>(callback) {
+
             @Override
             public void onSuccess(String result) {
                 if (result != null) callback.onSuccessData(result);
@@ -354,4 +388,56 @@ public class HttpDataUtils extends HttpUtilsBase {
     }
 
 
+    public static RequestHandler tbAppUsersExAdd(String AppUsersID, String MachineWellsCommunicationNoID
+            , final IDataResultImpl<String> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExAdd");
+        params.setCharset("gbk");
+        params.addBodyParameter("AppUsersID", AppUsersID);
+        params.addBodyParameter("MachineWellsCommunicationNoID", MachineWellsCommunicationNoID);
+//        params.addHeader();
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<String>(callback) {
+                    @Override
+                    public void onSuccess(String result) {
+                        LogUtil.i(result);
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    public static RequestHandler tbAppUsersExGetList(String where, final IDataResultImpl<String> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetList");
+        params.setCharset("gbk");
+        params.addBodyParameter("where", where);
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<String>(callback) {
+                    @Override
+                    public void onSuccess(String result) {
+                        LogUtil.i(result);
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
 }

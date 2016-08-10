@@ -5,8 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.sky.utils.ActivityLifecycle;
 import com.sky.water.ui.BaseActivity;
-import com.sky.water.utils.ActivityLifecycle;
 
 
 /**

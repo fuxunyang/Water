@@ -18,6 +18,10 @@ public class AreaPop extends BasePop<AreaEntity> {
 
     private BaseAdapter<AreaEntity, BaseHolder> adapter;
 
+    public AreaPop(View view) {
+        super(view);
+    }
+
     public AreaPop(View view, int width, int height) {
         super(view, width, height);
     }

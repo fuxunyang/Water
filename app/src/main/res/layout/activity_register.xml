@@ -12,13 +12,23 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="100dp"></LinearLayout>
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginTop="@dimen/margin_32"
+                android:layout_marginBottom="@dimen/margin_16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/ic_logo"
+                android:id="@+id/imageView" />
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/margin_16"
+            android:layout_margin="@dimen/margin_32"
             android:background="@drawable/back_bg"
             android:orientation="vertical"
             android:paddingLeft="@dimen/padding_16"
@@ -43,7 +53,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:layout_marginTop="@dimen/margin_32"
+                android:layout_marginTop="@dimen/margin_16"
                 android:orientation="horizontal">
 
                 <TextView
@@ -60,8 +70,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -84,8 +94,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -108,8 +118,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -126,14 +136,15 @@
 
                 <EditText
                     android:id="@+id/et_pass1"
-                    style="@style/register_style" />
+                    style="@style/register_style"
+                    android:inputType="textPassword" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -150,14 +161,15 @@
 
                 <EditText
                     android:id="@+id/et_pass2"
-                    style="@style/register_style" />
+                    style="@style/register_style"
+                    android:inputType="textPassword" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -181,15 +193,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
 
                 <TextView
                     style="@style/register_text_style"
@@ -206,8 +219,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -230,8 +243,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:background="@mipmap/ic_back"
-                    android:visibility="gone" />
+                    android:background="@mipmap/ic_xing"
+                    android:visibility="visible" />
 
             </LinearLayout>
 
@@ -242,7 +255,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="@dimen/margin_32"
                 android:layout_marginTop="@dimen/margin_8"
-                android:background="@drawable/register_bg"
+                android:background="@mipmap/bt_regist"
                 android:text="@string/register"
                 android:textColor="@color/white" />
 

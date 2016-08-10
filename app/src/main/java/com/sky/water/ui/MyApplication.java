@@ -2,8 +2,8 @@ package com.sky.water.ui;
 
 import android.app.Application;
 
+import com.sky.utils.ActivityLifecycle;
 import com.sky.water.BuildConfig;
-import com.sky.water.utils.ActivityLifecycle;
 import com.sky.water.utils.ToastUtils;
 
 import org.xutils.x;

@@ -13,6 +13,8 @@ import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -72,8 +74,23 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
         setToolbar();
         toRefresh();
         balance_01.setVisibility(View.GONE);
-        jumpActivity(this,BindCardActivity.class);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                jumpActivity(BalanceActivity.this, BindCardActivity.class);
+                break;
+        }
+        return false;
+    }
+
 
     /**
      * 页面刷新
