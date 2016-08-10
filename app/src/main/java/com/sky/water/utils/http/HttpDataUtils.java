@@ -8,6 +8,7 @@ import com.sky.water.api.RequestCallBack;
 import com.sky.water.common.Constants;
 import com.sky.water.model.ApiResponse;
 import com.sky.water.model.AreaEntity;
+import com.sky.water.model.Card;
 import com.sky.water.model.NewsEntity;
 import com.sky.water.model.SoilEntity;
 import com.sky.water.model.WaterEntity;
@@ -387,7 +388,45 @@ public class HttpDataUtils extends HttpUtilsBase {
         return handler;
     }
 
+    /**
+     * 有几张卡
+     *
+     * @param where
+     * @param callback
+     * @return
+     */
+    public static RequestHandler tbAppUsersExGetList(String where, final IDataResultImpl<List<Card>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetList");
+        params.setCharset("gbk");
+        params.addBodyParameter("where", where);
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<ApiResponse<List<Card>>>(callback) {
+                    @Override
+                    public void onSuccess(ApiResponse<List<Card>> result) {
+                        if (result != null) callback.onSuccessData(result.getRows());
+                        else callback.onSuccessData(null);
+                    }
 
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    /**
+     * 绑卡
+     *
+     * @param AppUsersID
+     * @param MachineWellsCommunicationNoID
+     * @param callback
+     * @return
+     */
     public static RequestHandler tbAppUsersExAdd(String AppUsersID, String MachineWellsCommunicationNoID
             , final IDataResultImpl<String> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExAdd");
@@ -400,7 +439,6 @@ public class HttpDataUtils extends HttpUtilsBase {
                 new RequestCallBack<String>(callback) {
                     @Override
                     public void onSuccess(String result) {
-                        LogUtil.i(result);
                         if (result != null) callback.onSuccessData(result);
                         else callback.onSuccessData(null);
                     }
@@ -416,16 +454,21 @@ public class HttpDataUtils extends HttpUtilsBase {
         return handler;
     }
 
-    public static RequestHandler tbAppUsersExGetList(String where, final IDataResultImpl<String> callback) {
-        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetList");
+    /**
+     * 解绑
+     * @param ID
+     * @param callback
+     * @return
+     */
+    public static RequestHandler tbAppUsersExDeleteUpdate(String ID, final IDataResultImpl<String> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExDeleteUpdate");
         params.setCharset("gbk");
-        params.addBodyParameter("where", where);
+        params.addBodyParameter("ID", ID);
         // 请求
         final Callback.Cancelable request = x.http().post(params,
                 new RequestCallBack<String>(callback) {
                     @Override
                     public void onSuccess(String result) {
-                        LogUtil.i(result);
                         if (result != null) callback.onSuccessData(result);
                         else callback.onSuccessData(null);
                     }
@@ -440,4 +483,6 @@ public class HttpDataUtils extends HttpUtilsBase {
         };
         return handler;
     }
+
+
 }

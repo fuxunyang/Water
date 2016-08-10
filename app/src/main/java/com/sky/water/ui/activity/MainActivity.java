@@ -63,6 +63,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private RelativeLayout lable_04;
     @ViewInject(R.id.lable_05)
     private RelativeLayout lable_05;
+    @ViewInject(R.id.lable_006)
+    private RelativeLayout lable_006;
 
     @ViewInject(R.id.lable_06)
     private RelativeLayout lable_06;
@@ -94,7 +96,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 PackageManager packageManager = getPackageManager();
                 try {
                     JSONObject json = new JSONObject(data);
-                    int codeVersion=json.getInt("Version");
+                    int codeVersion = json.getInt("Version");
                     PackageInfo packageInfo = packageManager.getPackageInfo(getPackageName(), 0);
                     int code = packageInfo.versionCode;
                     if (code < codeVersion) {
@@ -304,6 +306,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             jumpActivity(MainActivity.this, WaterActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_05))) {
             jumpActivity(MainActivity.this, BalanceActivity.class);
+        }else if (v.getTag().equals(getString(R.string.lable_006))) {
+            jumpActivity(MainActivity.this, BindCardActivity.class);
         }
     }
 }

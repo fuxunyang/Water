@@ -12,17 +12,17 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="center">
 
             <ImageView
-                android:layout_marginTop="@dimen/margin_32"
-                android:layout_marginBottom="@dimen/margin_16"
+                android:id="@+id/imageView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@mipmap/ic_logo"
-                android:id="@+id/imageView" />
+                android:layout_marginBottom="@dimen/margin_16"
+                android:layout_marginTop="@dimen/margin_32"
+                android:background="@mipmap/ic_logo" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,7 +88,8 @@
 
                 <EditText
                     android:id="@+id/et_card"
-                    style="@style/register_style" />
+                    style="@style/register_style"
+                    android:inputType="number" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -244,6 +245,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:background="@mipmap/ic_xing"
+                    android:inputType="number"
                     android:visibility="visible" />
 
             </LinearLayout>

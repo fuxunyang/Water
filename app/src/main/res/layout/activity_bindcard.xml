@@ -13,12 +13,12 @@
         style="@style/menu_image_style"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_32"
-        android:background="@mipmap/ic_menu_05" />
+        android:background="@mipmap/ic_menu_06" />
 
     <TextView
         style="@style/menu_text_style"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="@dimen/margin_8"
+        android:layout_margin="@dimen/margin_4"
         android:text="输入卡号" />
 
     <EditText
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/margin_16"
-        android:background="@drawable/register_bg"
+        android:background="@mipmap/ic_band"
         android:text="立即绑定"
         android:textColor="@color/white" />
 

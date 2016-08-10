@@ -102,5 +102,24 @@
             android:text="@string/lable_05" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/lable_006"
+        style="@style/menu_layout_style"
+        android:tag="@string/lable_006">
+
+        <ImageView
+            android:id="@+id/lable_006_img"
+            style="@style/menu_image_style"
+            android:background="@mipmap/ic_menu_06" />
+
+        <TextView
+            android:id="@+id/lable_06_tv"
+            style="@style/menu_text_style"
+            android:layout_alignLeft="@+id/lable_006_img"
+            android:layout_alignRight="@+id/lable_006_img"
+            android:layout_below="@+id/lable_006_img"
+            android:text="@string/lable_006" />
+    </RelativeLayout>
+
 
 </LinearLayout>
