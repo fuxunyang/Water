@@ -9,23 +9,25 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
-import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
 import com.sky.water.model.ApiResponse;
+import com.sky.water.model.Card;
 import com.sky.water.model.WaterEntity;
 import com.sky.water.ui.BaseActivity;
 import com.sky.water.ui.BaseAdapter;
 import com.sky.water.ui.adapter.BalanceAdapter;
+import com.sky.water.ui.dialog.BasePop;
+import com.sky.water.ui.dialog.CardPop;
+import com.sky.water.utils.ScreenUtils;
 import com.sky.water.utils.http.HttpDataUtils;
 
 import org.json.JSONException;
@@ -46,10 +48,10 @@ import java.util.List;
 public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
 
-    @ViewInject(R.id.et_card)
-    private EditText et_card;
-    @ViewInject(R.id.imgbt_search)
-    private ImageButton search;
+    @ViewInject(R.id.tv_card)
+    private TextView tv_card;
+//    @ViewInject(R.id.imgbt_search)
+//    private ImageButton search;
     @ViewInject(R.id.balance)
     private TextView balance;
     @ViewInject(R.id.layout_balance)
@@ -66,12 +68,16 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
     private int total = 0;
     private int page = 1;
 
+    private BasePop cardPop;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbar();
         toRefresh();
         balance_01.setVisibility(View.GONE);
+        getCard();
     }
 
 
@@ -124,20 +130,19 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
         });
     }
 
-    @Event(R.id.imgbt_search)
+    @Event({R.id.tv_card,R.id.imgbt_search})
     private void searchOnClick(View view) {
-        showLoading();
-        page = 1;
-        getData();
-        getBalance();
+        if (!cardPop.isShowing())
+            cardPop.showAsDropDown(tv_card);
     }
 
+
     private void getData() {
-        String card = et_card.getText().toString().trim();
-        if (TextUtils.isEmpty(card)) {
-            showToast("卡号不能为空");
-            return;
-        }
+        String card = tv_card.getText().toString().trim();
+//        if (TextUtils.isEmpty(card)) {
+//            showToast("卡号不能为空");
+//            return;
+//        }
         HttpDataUtils.getIrrigationWaters(card, page + "", new IDataResultImpl<ApiResponse<List<WaterEntity>>>() {
             @Override
             public void onSuccessData(ApiResponse<List<WaterEntity>> data) {
@@ -154,11 +159,7 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
     }
 
     private void getBalance() {
-        String card = et_card.getText().toString().trim();
-        if (TextUtils.isEmpty(card)) {
-            showToast("卡号不能为空");
-            return;
-        }
+        String card = tv_card.getText().toString().trim();
         HttpDataUtils.getBalance(card, new IDataResultImpl<String>() {
             @Override
             public void onSuccessData(String data) {
@@ -223,5 +224,43 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
                         showToast("正在加载，请稍后");
                     }
                 }).show();
+    }
+
+    private void getCard() {
+        showLoading();
+        HttpDataUtils.tbAppUsersExGetList("1", new IDataResultImpl<List<Card>>() {
+            @Override
+            public void onSuccessData(List<Card> data) {
+                hideLoading();
+                if (data == null) {
+                    showToast(getString(R.string.error_03));
+                    return;
+                }
+                tv_card.setText(data.get(0).getMachineNo());
+                createAreaShowFloder(data);
+                if (!cardPop.isShowing())
+                    cardPop.showAsDropDown(tv_card);
+            }
+        });
+    }
+
+    private void createAreaShowFloder(final List<Card> datas) {
+        int[] wh = ScreenUtils.getWidthAndHeight(this);
+        if (cardPop == null)
+            cardPop = new CardPop(LayoutInflater.from(this).inflate(R.layout.adapter_area, null),
+                    wh[0], wh[1]);
+        cardPop.setDatas(datas);
+        cardPop.setOnItemClickListener(new BasePop.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Card data = datas.get(position);
+                tv_card.setText(data.getMachineNo());
+                showLoading();
+                page = 1;
+                getData();
+                getBalance();
+                cardPop.dismiss();
+            }
+        });
     }
 }

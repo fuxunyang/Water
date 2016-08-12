@@ -147,7 +147,7 @@ public class WaterEntity implements Serializable {
     }
 
     public String getWellTotalWaterThreshold() {
-        return WellTotalWaterThreshold;
+        return WellTotalWaterThreshold==null?"-1":WellTotalWaterThreshold;
     }
 
     public void setWellTotalWaterThreshold(String wellTotalWaterThreshold) {

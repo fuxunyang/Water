@@ -30,7 +30,7 @@ import java.util.List;
 public class RegisterActivity extends BaseActivity {
     @ViewInject(R.id.et_real)
     private EditText etReal;
-    @ViewInject(R.id.et_card)
+    @ViewInject(R.id.tv_card)
     private EditText et_card;
     @ViewInject(R.id.et_nick)
     private EditText et_nick;
@@ -49,10 +49,6 @@ public class RegisterActivity extends BaseActivity {
 
 
     private BasePop areaPop;
-    private List<AreaEntity> areas;
-    private int total = 0;
-    private boolean isDown;
-
 
     @Event(R.id.et_xiangzhen)
     private void getAreaIDonClick(View view) {
@@ -106,7 +102,6 @@ public class RegisterActivity extends BaseActivity {
                     showToast(getString(R.string.error_03));
                     return;
                 }
-                areas = data;
                 et_xiangzhen.setText(data.get(0).getName());
                 areaID = data.get(0).getID() + "";
                 createAreaShowFloder(data);

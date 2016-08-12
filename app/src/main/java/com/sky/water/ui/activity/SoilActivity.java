@@ -6,12 +6,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -41,12 +39,12 @@ import java.util.List;
  */
 @ContentView(R.layout.activity_soil)
 public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    @ViewInject(R.id.et_card)
+    @ViewInject(R.id.tv_card)
     private TextView et_card;
     @ViewInject(R.id.img_01)
     private ImageView img_01;
-    @ViewInject(R.id.imgbt_search)
-    private ImageButton search;
+//    @ViewInject(R.id.imgbt_search)
+//    private ImageButton search;
 
     @ViewInject(R.id.bt_temp)
     private Button bt_temp;
@@ -68,6 +66,7 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
     private List<AreaEntity> areas;
     private int total = 0;
     private boolean isDown;
+    private String areaID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -153,26 +152,26 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         });
     }
 
-    @Event(R.id.imgbt_search)
-    private void searchOnClick(View view) {
-        getSoils();
-    }
+//    @Event(R.id.imgbt_search)
+//    private void searchOnClick(View view) {
+//        getSoils();
+//    }
 
-    private void getSoils() {
-        String areaName = et_card.getText().toString().trim();
-        if (TextUtils.isEmpty(areaName)) {
-            showToast("地名不能为空");
-            return;
-        }
-        for (AreaEntity area : areas) {
-            if (area.getName().contains(areaName)) {
-                getSoil(area.getID() + "");
-                return;
-            }
-        }
-    }
+//    private void getSoils() {
+//        String areaName = et_card.getText().toString().trim();
+//        if (TextUtils.isEmpty(areaName)) {
+//            showToast("地名不能为空");
+//            return;
+//        }
+////        for (AreaEntity area : areas) {
+////            if (area.getName().contains(areaName)) {
+////                getSoil(area.getID() + "");
+////                return;
+////            }
+////        }
+//    }
 
-    @Event({R.id.et_card, R.id.img_01})
+    @Event({R.id.tv_card, R.id.img_01})
     private void AreaOnClick(View view) {
         if (!areaPop.isShowing())
             areaPop.showAsDropDown(et_card);
@@ -231,7 +230,7 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 break;
             case 1:
                 setSnack(recyclerView);
-                getSoils();
+//                getSoils();
                 break;
             case 0x99:
                 getSoil(msg.arg1 + "");

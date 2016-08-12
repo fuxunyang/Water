@@ -25,10 +25,10 @@
         android:id="@+id/ed_card"
         android:layout_width="253dp"
         android:layout_height="40dp"
-        android:inputType="number"
         android:layout_gravity="center_horizontal"
         android:layout_margin="@dimen/margin_16"
-        android:background="@drawable/ed_bg" />
+        android:background="@drawable/ed_bg"
+        android:inputType="number" />
 
     <Button
         android:id="@+id/bt_bind"
@@ -40,15 +40,15 @@
         android:text="立即绑定"
         android:textColor="@color/white" />
 
-    <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@id/swipe"
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+    <!--android:id="@id/swipe"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="@color/white">-->
+
+    <com.sky.water.ui.widget.MyRecycleView
+        android:id="@id/recycle"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white">
-
-        <com.sky.water.ui.widget.MyRecycleView
-            android:id="@id/recycle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </android.support.v4.widget.SwipeRefreshLayout>
+        android:background="@color/white" />
 </LinearLayout>

@@ -16,7 +16,7 @@ import com.sky.water.ui.BaseHolder;
  * @date 15/12/9 下午8:52
  */
 public class WaterAdapter extends BaseAdapter<WaterEntity, BaseHolder> {
-    private boolean userOnlineState = false;
+    private boolean userOnlineState = false;//是否超标
 
     public WaterAdapter(int layoutId) {
         super(layoutId);

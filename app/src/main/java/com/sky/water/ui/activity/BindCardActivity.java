@@ -59,7 +59,7 @@ public class BindCardActivity extends BaseActivity {
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                     unBindCard(datas.get(position).getMachineWellsCommunicationNoID()+"");
+                        unBindCard(datas.get(position).getMachineWellsCommunicationNoID() + "");
                     }
                 });
 
@@ -69,6 +69,9 @@ public class BindCardActivity extends BaseActivity {
 
     }
 
+    /**
+     * 查询用户关联卡号
+     */
     private void getBindCard() {
         HttpDataUtils.tbAppUsersExGetList("1", new IDataResultImpl<List<Card>>() {
             @Override
@@ -78,6 +81,10 @@ public class BindCardActivity extends BaseActivity {
         });
     }
 
+    /**
+     * 解除绑定
+     * @param id
+     */
     private void unBindCard(String id) {
         HttpDataUtils.tbAppUsersExDeleteUpdate(id, new IDataResultImpl<String>() {
             @Override
@@ -88,7 +95,6 @@ public class BindCardActivity extends BaseActivity {
                 } else {
                     showToast("解绑失败");
                 }
-
             }
         });
     }

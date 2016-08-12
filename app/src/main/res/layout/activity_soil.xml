@@ -29,7 +29,7 @@
                 android:textSize="@dimen/medium" />
 
             <TextView
-                android:id="@+id/et_card"
+                android:id="@+id/tv_card"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/tv001"
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/tv001"
                 android:layout_alignTop="@id/tv001"
-                android:layout_toRightOf="@id/et_card"
+                android:layout_toRightOf="@id/tv_card"
                 android:background="@color/black"
                 android:src="@mipmap/ic_menu_trangle_down" />
         </RelativeLayout>
