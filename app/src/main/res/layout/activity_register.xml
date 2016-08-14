@@ -88,8 +88,7 @@
 
                 <EditText
                     android:id="@+id/tv_card"
-                    style="@style/register_style"
-                    android:inputType="number" />
+                    style="@style/register_style" />
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -112,7 +111,7 @@
                     android:text="@string/register_name" />
 
                 <EditText
-                    android:id="@+id/et_nick"
+                    android:id="@+id/et_account"
                     style="@style/register_style" />
 
                 <ImageView
@@ -203,7 +202,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
                 android:orientation="horizontal"
-                android:visibility="gone">
+                android:visibility="visible">
 
                 <TextView
                     style="@style/register_text_style"
@@ -238,7 +237,8 @@
 
                 <EditText
                     android:id="@+id/et_phone"
-                    style="@style/register_style" />
+                    style="@style/register_style"
+                    android:inputType="number" />
 
                 <ImageView
                     android:layout_width="wrap_content"

@@ -10,7 +10,19 @@ public class Constants {
 //    public static final String BASE_URL="http://111.160.108.250:8091/Service1.asmx";
     public static final String BASE_URL="http://www.jxncsl.com.cn:8091/Service1.asmx";
     public static final String IMG_URL="http://www.jxncsl.com.cn:8090";
+
     public static final String USERNAME="username";
     public static final String ISONLINE="isOnline";
+
+    public static final String ID="iD";
+    public static final String TrueName="trueName";
+    public static final String AreaID="areaID";
+    public static final String UserName="userName";
+    public static final String PHNo="pHNo";
+    public static final String Name="name";
+    public static final String ParentName="parentName";
+
+
     public static final String AK = "6tYzTvGZSOpYB5Oc2YGGOKt8";
+
 }

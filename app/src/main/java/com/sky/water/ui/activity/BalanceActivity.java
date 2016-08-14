@@ -17,8 +17,10 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sky.utils.SPUtils;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
+import com.sky.water.common.Constants;
 import com.sky.water.model.ApiResponse;
 import com.sky.water.model.Card;
 import com.sky.water.model.WaterEntity;
@@ -228,7 +230,8 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
 
     private void getCard() {
         showLoading();
-        HttpDataUtils.tbAppUsersExGetList("1", new IDataResultImpl<List<Card>>() {
+        HttpDataUtils.tbAppUsersExGetListByAppUsersID (
+                (String) SPUtils.get(BalanceActivity.this, Constants.ID,""), new IDataResultImpl<List<Card>>() {
             @Override
             public void onSuccessData(List<Card> data) {
                 hideLoading();

@@ -89,6 +89,10 @@
             android:name=".ui.activity.LineChartActivity"
             android:label="@string/lable_13"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.UserActivity"
+            android:label="@string/lable_13"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

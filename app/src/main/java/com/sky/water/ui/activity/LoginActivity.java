@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.sky.utils.SPUtils;
 import com.sky.water.BuildConfig;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
+import com.sky.water.model.User;
 import com.sky.water.ui.BaseActivity;
 import com.sky.water.utils.http.HttpDataUtils;
 
@@ -35,8 +37,8 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (BuildConfig.DEBUG) {
-            et_name.setText("admin");
-            et_pass.setText("admin");
+            et_name.setText("l");
+            et_pass.setText("l");
         }
     }
 
@@ -49,30 +51,27 @@ public class LoginActivity extends BaseActivity {
             return;
         }
         showLoading();
-        HttpDataUtils.login(name, pass, new IDataResultImpl<String>() {
+        HttpDataUtils.login(name, pass, new IDataResultImpl<User>() {
             @Override
-            public void onSuccessData(String data) {
+            public void onSuccessData(User data) {
                 hideLoading();
                 if (data == null) {
                     showToast(getString(R.string.error_02));
                     return;
                 }
-                if (data.contains("true")) {
-                    showToast(getString(R.string.success));
-                    setUserOnlineState(true);
-                    finish();
-                } else if (data.contains("false")) {
-                    showToast(getString(R.string.error_01));
-                }
+                showToast(getString(R.string.success));
+                setUserOnlineState(true);
+                SPUtils.put(LoginActivity.this,SPUtils.getValue(data));
+                finish();
             }
         });
-
     }
 
     @Event(R.id.bt_register)
     private void registOnClick(View view) {
-        jumpActivity(this,RegisterActivity.class);
+        jumpActivity(this, RegisterActivity.class);
     }
+
     //手指按下的点为(downX, downY)手指离开屏幕的点为(x2, y2)，右滑关闭
     float downX = 0;
     float downY = 0;

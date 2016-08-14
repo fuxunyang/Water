@@ -19,10 +19,11 @@ public class Card implements Serializable {
      * RemoveFlag : 0
      * NoAreaID : 460
      * MachineName : 村委会
-     * MachineNo : 1
+     * MachineNo : 255
      * MachineAuit : 0.00
      * AppUsersID : 1
-     * MachineWellsCommunicationNoID : 1
+     * MachineWellsCommunicationNoID : 255
+     * ID : 5
      */
 
     private String TrueName;
@@ -38,6 +39,7 @@ public class Card implements Serializable {
     private String MachineAuit;
     private int AppUsersID;
     private int MachineWellsCommunicationNoID;
+    private int ID;
 
     public String getTrueName() {
         return TrueName;
@@ -141,5 +143,13 @@ public class Card implements Serializable {
 
     public void setMachineWellsCommunicationNoID(int MachineWellsCommunicationNoID) {
         this.MachineWellsCommunicationNoID = MachineWellsCommunicationNoID;
+    }
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
     }
 }

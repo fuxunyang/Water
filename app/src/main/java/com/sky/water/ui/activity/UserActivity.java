@@ -3,11 +3,10 @@ package com.sky.water.ui.activity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.sky.utils.SPUtils;
-import com.sky.utils.TextUtil;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
 import com.sky.water.common.Constants;
@@ -25,13 +24,21 @@ import org.xutils.view.annotation.ViewInject;
 import java.util.List;
 
 /**
- * Created by sky on 2016/7/29.
+ * Created by 机械革命 on 2016
  */
-@ContentView(R.layout.activity_bindcard)
-public class BindCardActivity extends BaseActivity {
+@ContentView(R.layout.activity_user)
+public class UserActivity extends BaseActivity {
 
-    @ViewInject(R.id.ed_card)
-    private EditText edCard;
+    @ViewInject(R.id.et_real)
+    private TextView etReal;
+    @ViewInject(R.id.et_account)
+    private TextView et_nick;
+    @ViewInject(R.id.et_xiangzhen)
+    private TextView et_xiangzhen;
+    @ViewInject(R.id.et_cunzhuang)
+    private TextView et_cunzhuang;
+    @ViewInject(R.id.et_phone)
+    private TextView et_phone;
 
     @ViewInject(R.id.recycle)
     private MyRecycleView recycle;
@@ -43,9 +50,10 @@ public class BindCardActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbar();
+        setText();
         setAdapter();
 
-        userId = (String) SPUtils.get(BindCardActivity.this, Constants.ID, "");
+        userId = (String) SPUtils.get(this, Constants.ID, "");
         if (TextUtils.isEmpty(userId)) {
             showToast("请先登录");
             return;
@@ -53,8 +61,22 @@ public class BindCardActivity extends BaseActivity {
         getBindCard();
     }
 
+    private void setText() {
+        etReal.setText((String) SPUtils.get(this, Constants.TrueName, ""));
+        et_nick.setText((String) SPUtils.get(this, Constants.UserName, ""));
+        et_xiangzhen.setText((String) SPUtils.get(this, Constants.ParentName, ""));
+        et_cunzhuang.setText((String) SPUtils.get(this, Constants.Name, ""));
+        et_phone.setText((String) SPUtils.get(this, Constants.PHNo, ""));
+    }
+
+    @Event(R.id.bt_Cancellation)
+    private void cacelOnClick(View view) {
+        SPUtils.clear(this);
+        finish();
+    }
+
     private void setAdapter() {
-        adapter = new BaseAdapter<Card, BaseHolder>(R.layout.item_card) {
+        adapter = new BaseAdapter<Card, BaseHolder>(R.layout.item_card2) {
             @Override
             protected BaseHolder onCreateBodyHolder(View view) {
                 return new BaseHolder(view);
@@ -109,57 +131,4 @@ public class BindCardActivity extends BaseActivity {
             }
         });
     }
-
-    @Event(R.id.bt_bind)
-    private void onClick(View view) {
-        final String card = TextUtil.getText(edCard);
-        if (TextUtil.notNull(card, "卡号")) return;
-        final String treaName = (String) SPUtils.get(BindCardActivity.this, Constants.TrueName, "");
-        final String areaId = (String) SPUtils.get(BindCardActivity.this, Constants.AreaID, "");
-
-        if (treaName == null || treaName.length() == 0 || areaId == null || areaId.length() == 0) {
-            showToast("请先登录");
-            return;
-        }
-        //卡号是否存在
-        HttpDataUtils.tbMachineWellsCommunicationNoExists(treaName, areaId, card, new IDataResultImpl<String>() {
-            @Override
-            public void onSuccessData(String data) {
-                if (data.contains("true")) {
-                    isBind(card, treaName, areaId);
-                } else {
-                    showToast("卡号不存在");
-                }
-            }
-        });
-    }
-
-    private void isBind(final String card, String treaName, String areaId) {
-        HttpDataUtils.tbAppUsersExExistsName(treaName, areaId, card, new IDataResultImpl<String>() {
-            @Override
-            public void onSuccessData(String data) {
-                if (data.contains("true")) {
-                    showToast("卡号已绑定");
-                } else {
-                    bindCard(card);
-                }
-            }
-        });
-    }
-
-    private void bindCard(String card) {
-        HttpDataUtils.tbAppUsersExAdd("1", card, new IDataResultImpl<String>() {
-            @Override
-            public void onSuccessData(String data) {
-                if (data.contains("true")) {
-                    showToast("绑卡成功");
-                    getBindCard();
-                } else {
-                    showToast("绑卡失败");
-                }
-            }
-        });
-    }
-
-
 }

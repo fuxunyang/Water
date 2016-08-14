@@ -11,12 +11,12 @@ import com.sky.water.model.AreaEntity;
 import com.sky.water.model.Card;
 import com.sky.water.model.NewsEntity;
 import com.sky.water.model.SoilEntity;
+import com.sky.water.model.User;
 import com.sky.water.model.WaterEntity;
 import com.sky.water.model.WeatherEntity;
 import com.sky.water.ui.activity.ErrorLogActivity;
 
 import org.xutils.common.Callback;
-import org.xutils.common.util.LogUtil;
 import org.xutils.ex.HttpException;
 import org.xutils.http.RequestParams;
 import org.xutils.x;
@@ -60,16 +60,35 @@ public class HttpDataUtils extends HttpUtilsBase {
      * @param pass
      * @param callback
      */
-    public static void login(String name, String pass, final IDataResultImpl<String> callback) {
+    public static void login(String name, String pass, final IDataResultImpl<User> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/ManagerLogin");
         params.addBodyParameter("userName", name);
         params.addBodyParameter("passWord", pass);
-        x.http().post(params, new RequestCallBack<String>(callback) {
+        params.setCharset("gbk");
+        x.http().post(params, new RequestCallBack<ApiResponse<List<User>>>(callback) {
             @Override
-            public void onSuccess(String result) {
-                LogUtil.d(result);
-                if (result != null) callback.onSuccessData(result);
+            public void onSuccess(ApiResponse<List<User>> result) {
+                if (result != null) callback.onSuccessData(result.getRows().get(0));
                 else callback.onSuccessData(null);
+            }
+        });
+    }
+
+    /**
+     * 是否存在 true存在false不存在
+     *
+     * @param where 姓名
+     * @param callback
+     */
+    public static void tbAppUsersExGetList(String where, final IDataResultImpl<Boolean> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetList");
+        params.addBodyParameter("where", where);
+        params.setCharset("gbk");
+        x.http().post(params, new RequestCallBack<ApiResponse<List<User>>>(callback) {
+            @Override
+            public void onSuccess(ApiResponse<List<User>> result) {
+                if (result.getTotal() == 0) callback.onSuccessData(false);
+                else callback.onSuccessData(true);
             }
         });
     }
@@ -161,6 +180,29 @@ public class HttpDataUtils extends HttpUtilsBase {
      */
     public static RequestHandler getArea(final IDataResultImpl<List<AreaEntity>> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/GetArea");
+        params.setCharset("gbk");
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<ApiResponse<List<AreaEntity>>>(callback) {
+                    @Override
+                    public void onSuccess(ApiResponse<List<AreaEntity>> result) {
+                        if (result != null) callback.onSuccessData(result.getRows());
+                        else callback.onSuccessData(null);
+                    }
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    public static RequestHandler getCunZhuang(String ParentId, final IDataResultImpl<List<AreaEntity>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/GetAreaZ");
+        params.addBodyParameter("ParentId", ParentId);
         params.setCharset("gbk");
         // 请求
         final Callback.Cancelable request = x.http().post(params,
@@ -391,20 +433,96 @@ public class HttpDataUtils extends HttpUtilsBase {
     /**
      * 有几张卡
      *
-     * @param where
+     * @param AppUsersID
      * @param callback
      * @return
      */
-    public static RequestHandler tbAppUsersExGetList(String where, final IDataResultImpl<List<Card>> callback) {
-        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetList");
+    public static RequestHandler tbAppUsersExGetListByAppUsersID(String AppUsersID, final IDataResultImpl<List<Card>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetListByAppUsersID ");
         params.setCharset("gbk");
-        params.addBodyParameter("where", where);
+        params.addBodyParameter("AppUsersID", AppUsersID);
         // 请求
         final Callback.Cancelable request = x.http().post(params,
                 new RequestCallBack<ApiResponse<List<Card>>>(callback) {
                     @Override
                     public void onSuccess(ApiResponse<List<Card>> result) {
                         if (result != null) callback.onSuccessData(result.getRows());
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    /**
+     * 卡号是否存在
+     *
+     * @param MachineName
+     * @param AreaID
+     * @param MachineNo
+     * @param callback
+     * @return
+     */
+    public static RequestHandler tbMachineWellsCommunicationNoExists(String MachineName, String AreaID,
+                                                                     String MachineNo
+            , final IDataResultImpl<String> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbMachineWellsCommunicationNoExists");
+        params.setCharset("gbk");
+        params.addBodyParameter("MachineName", MachineName);
+        params.addBodyParameter("AreaID", AreaID);
+        params.addBodyParameter("MachineNo", MachineNo);
+//        params.addHeader();
+        // 请求
+        final Callback.Cancelable request = x.http().get(params,
+                new RequestCallBack<String>(callback) {
+                    @Override
+                    public void onSuccess(String result) {
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    /**
+     * 是否已绑定
+     *
+     * @param TrueName
+     * @param AreaID
+     * @param MachineNo
+     * @param callback
+     * @return
+     */
+    public static RequestHandler tbAppUsersExExistsName(String TrueName, String AreaID,
+                                                        String MachineNo
+            , final IDataResultImpl<String> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExExistsName");
+        params.setCharset("gbk");
+        params.addBodyParameter("TrueName", TrueName);
+        params.addBodyParameter("AreaID", AreaID);
+        params.addBodyParameter("MachineNo", MachineNo);
+//        params.addHeader();
+        // 请求
+        final Callback.Cancelable request = x.http().get(params,
+                new RequestCallBack<String>(callback) {
+                    @Override
+                    public void onSuccess(String result) {
+                        if (result != null) callback.onSuccessData(result);
                         else callback.onSuccessData(null);
                     }
 
@@ -456,6 +574,7 @@ public class HttpDataUtils extends HttpUtilsBase {
 
     /**
      * 解绑
+     *
      * @param ID
      * @param callback
      * @return

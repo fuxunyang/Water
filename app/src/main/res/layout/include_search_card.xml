@@ -26,8 +26,8 @@
             android:layout_alignTop="@id/tv001"
             android:layout_toRightOf="@id/tv001"
             android:background="@color/white"
-            android:gravity="center"
-            android:padding="@dimen/padding_4" />
+            android:lines="1"
+            android:gravity="center" />
 
 
         <ImageView

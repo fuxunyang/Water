@@ -55,7 +55,7 @@
     <!--menu的item文字，命名格式为：action_文字-->
     <string name="action_settings">Settings</string>
 
-    <string name="login">管理者登录</string>
+    <string name="login">登录</string>
     <string name="username">用户名</string>
     <string name="userpass">密码</string>
     <string name="error_01">账号或密码错误</string>
@@ -65,10 +65,11 @@
     <string name="down_check">下载失败，请检查网络连接</string>
     <string name="down_checksd">下载失败，请检查sd卡是否存在</string>
     <string name="register">注册</string>
+    <string name="Cancellation">注销</string>
     <string name="lable_register">注册</string>
     <string name="register_realname">真实姓名：</string>
     <string name="register_card">身份证号：</string>
-    <string name="register_name">用户昵称：</string>
+    <string name="register_name">用户账号：</string>
     <string name="register_setpass">设置密码：</string>
     <string name="register_surepass">确认密码：</string>
     <string name="register_xiangzhen">所属乡镇：</string>

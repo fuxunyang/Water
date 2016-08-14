@@ -264,7 +264,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
-                jumpActivity(MainActivity.this, LoginActivity.class);
+                if (getUserOnlineState())
+                    jumpActivity(MainActivity.this, UserActivity.class);
+                else
+                    jumpActivity(MainActivity.this, LoginActivity.class);
                 break;
         }
         return false;
@@ -306,7 +309,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             jumpActivity(MainActivity.this, WaterActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_05))) {
             jumpActivity(MainActivity.this, BalanceActivity.class);
-        }else if (v.getTag().equals(getString(R.string.lable_006))) {
+        } else if (v.getTag().equals(getString(R.string.lable_006))) {
             jumpActivity(MainActivity.this, BindCardActivity.class);
         }
     }

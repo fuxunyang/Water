@@ -8,6 +8,25 @@ import java.io.Serializable;
  * @date 16/1/26 下午3:53
  */
 public class AreaEntity implements Serializable {
+//    "ZhenID": 2,
+//            "ZhenName": "邦均镇",
+//            "ID": 28,
+//            "ParentId": 2,
+//            "Code": "JXC001",
+//            "Name": "西草场村",
+//            "AreaLevel": "村",
+//            "Status": 1,
+//            "ParentName": "邦均镇"
+
+//    "ZhenID": 2,
+//            "ZhenName": "邦均镇",
+//            "ID": 2,
+//            "ParentId": 1,
+//            "Code": "JXZ001",
+//            "Name": "邦均镇",
+//            "AreaLevel": "乡镇",
+//            "Status": 1,
+//            "ParentName": "蓟县"
     private int ID;
     private int ParentId;
     private String Code;

@@ -2,6 +2,7 @@ package com.sky.water.api;
 
 import com.google.gson.Gson;
 
+import org.xutils.common.util.LogUtil;
 import org.xutils.http.app.ResponseParser;
 import org.xutils.http.request.UriRequest;
 
@@ -20,7 +21,7 @@ public class JsonToResponse implements ResponseParser {
 
     @Override
     public Object parse(Type resultType, Class<?> resultClass, String result) throws Throwable {
-//        LogUtil.i(result);
+        LogUtil.i(result);
         return new Gson().fromJson(result,resultType);
     }
 }
