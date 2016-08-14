@@ -80,8 +80,8 @@ public class HttpDataUtils extends HttpUtilsBase {
      * @param where 姓名
      * @param callback
      */
-    public static void tbAppUsersExGetList(String where, final IDataResultImpl<Boolean> callback) {
-        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetList");
+    public static void tbAppUsersGetList(String where, final IDataResultImpl<Boolean> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersGetList ");
         params.addBodyParameter("where", where);
         params.setCharset("gbk");
         x.http().post(params, new RequestCallBack<ApiResponse<List<User>>>(callback) {

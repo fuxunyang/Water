@@ -4,6 +4,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -48,9 +49,14 @@ public class RegisterActivity extends BaseActivity {
     private TextView et_cunzhuang;
     @ViewInject(R.id.et_phone)
     private EditText et_phone;
+    @ViewInject(R.id.bt_register)
+    private Button register;
 
     private String areaID;
     private BasePop areaPop;
+    private boolean isCard;
+    private boolean isZhangHao;
+    private boolean isPhone;
 
     @Event(value = {R.id.tv_card, R.id.et_account, R.id.et_phone}, type = View.OnFocusChangeListener.class)
     private void OnFocusChange(View v, boolean hasFocus) {
@@ -62,24 +68,56 @@ public class RegisterActivity extends BaseActivity {
                     if (card.length() != 18) {
                         showToast("身份证号位数不正确");
                     }
-                    checkReal("UserID=" + "'" + card + "'", "此身份证号已存在");
+                    //是否存在 true存在false不存在
+                    HttpDataUtils.tbAppUsersGetList("UserID=" + "'" + card + "'", new IDataResultImpl<Boolean>() {
+                        @Override
+                        public void onSuccessData(Boolean data) {
+                            isCard = data;
+                            if (data) {
+                                showToast("此身份证号已存在");
+                            }
+
+                        }
+                    });
+
                 }
                 break;
             case R.id.et_account:
                 if (!hasFocus) {
                     final String zhanghao = TextUtil.getText(et_account);
                     if (TextUtil.notNull(zhanghao, "用户账号")) return;
-                    checkReal("UserName=" + "'" + zhanghao + "'", "此账号已存在");
+                    //是否存在 true存在false不存在
+                    HttpDataUtils.tbAppUsersGetList("UserName=" + "'" + zhanghao + "'", new IDataResultImpl<Boolean>() {
+                        @Override
+                        public void onSuccessData(Boolean data) {
+                            isZhangHao = data;
+                            if (data) {
+                                showToast("此账号已存在");
+                            }
+
+                        }
+                    });
                 }
                 break;
             case R.id.et_phone:
                 if (!hasFocus) {
                     final String phone = TextUtil.getText(et_phone);
                     if (TextUtil.notNull(phone, "手机号")) return;
-                    if(!RegexUtils.isChinesePhoneNumber(phone)){
-                        showToast("手机格式不正确");return;
+                    if (!RegexUtils.isChinesePhoneNumber(phone)) {
+                        showToast("手机格式不正确");
+                        return;
                     }
-                    checkReal("PHNo=" + "'" + phone + "'", "此手机号已存在");
+                    //是否存在 true存在false不存在
+                    HttpDataUtils.tbAppUsersGetList("PHNo=" + "'" + phone + "'", new IDataResultImpl<Boolean>() {
+                        @Override
+                        public void onSuccessData(Boolean data) {
+                            isPhone = data;
+                            if (data) {
+                                showToast("此手机号已存在");
+                            }
+
+                        }
+                    });
                 }
                 break;
         }
@@ -107,23 +145,37 @@ public class RegisterActivity extends BaseActivity {
         if (card.length() != 18) {
             showToast("身份证号位数不正确");
         }
+        if (isCard) {
+            showToast("此身份证号已存在");
+            return;
+        }
         final String zhanghao = TextUtil.getText(et_account);
         if (TextUtil.notNull(zhanghao, "用户账号")) return;
-        if (!RegexUtils.isIdentifier(zhanghao)){
+        if (!RegexUtils.isIdentifier(zhanghao)) {
             showToast("账号为字母数字下滑线的构成");
             return;
         }
+        if (isZhangHao) {
+            showToast("此账号已存在");
+            return;
+        }
+
         final String phone = TextUtil.getText(et_phone);
         if (TextUtil.notNull(phone, "手机号")) return;
-        if(!RegexUtils.isChinesePhoneNumber(phone)){
-            showToast("手机格式不正确");return;
+        if (!RegexUtils.isChinesePhoneNumber(phone)) {
+            showToast("手机格式不正确");
+            return;
+        }
+        if (isPhone) {
+            showToast("此手机号已存在");
+            return;
         }
 
         final String pass1 = TextUtil.getText(et_pass1);
         if (TextUtil.notNull(pass1, "密码")) return;
         String pass2 = TextUtil.getText(et_pass2);
         if (TextUtil.notNull(pass2, "确认密码")) return;
-        if (pass1.length()!=6||pass2.length()!=6){
+        if (pass1.length() != 6 || pass2.length() != 6) {
             showToast("密码长度为6位");
             return;
         }
@@ -140,21 +192,6 @@ public class RegisterActivity extends BaseActivity {
             return;
         }
         register(name, card, zhanghao, phone, pass1);
-    }
-
-    private void checkReal(String name, final String toast) {
-        //是否存在 true存在false不存在
-        HttpDataUtils.tbAppUsersExGetList(name, new IDataResultImpl<Boolean>() {
-            @Override
-            public void onSuccessData(Boolean data) {
-                if (data) {
-                    showToast(toast);
-                } else {
-
-                }
-
-            }
-        });
     }
 
     private void register(String name, String card, final String zhanghao, String phone, final String pass1) {
