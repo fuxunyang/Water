@@ -1,6 +1,9 @@
 package com.sky.water.ui.activity;
 
+import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,18 +61,25 @@ public class RegisterActivity extends BaseActivity {
     private boolean isZhangHao;
     private boolean isPhone;
 
-    @Event(value = {R.id.tv_card, R.id.et_account, R.id.et_phone}, type = View.OnFocusChangeListener.class)
-    private void OnFocusChange(View v, boolean hasFocus) {
-        switch (v.getId()) {
-            case R.id.tv_card:
-                if (!hasFocus) {
-                    final String card = TextUtil.getText(et_card);
-                    if (TextUtil.notNull(card, "身份证号")) return;
-                    if (card.length() != 18) {
-                        showToast("身份证号位数不正确");
-                    }
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        et_card.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 18)
                     //是否存在 true存在false不存在
-                    HttpDataUtils.tbAppUsersGetList("UserID=" + "'" + card + "'", new IDataResultImpl<Boolean>() {
+                    HttpDataUtils.tbAppUsersGetList("UserID=" + "'" + s + "'", new IDataResultImpl<Boolean>() {
                         @Override
                         public void onSuccessData(Boolean data) {
                             isCard = data;
@@ -79,36 +89,56 @@ public class RegisterActivity extends BaseActivity {
 
                         }
                     });
+            }
+        });
+        et_account.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                }
-                break;
-            case R.id.et_account:
-                if (!hasFocus) {
-                    final String zhanghao = TextUtil.getText(et_account);
-                    if (TextUtil.notNull(zhanghao, "用户账号")) return;
-                    //是否存在 true存在false不存在
-                    HttpDataUtils.tbAppUsersGetList("UserName=" + "'" + zhanghao + "'", new IDataResultImpl<Boolean>() {
-                        @Override
-                        public void onSuccessData(Boolean data) {
-                            isZhangHao = data;
-                            if (data) {
-                                showToast("此账号已存在");
-                            }
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                final String zhanghao = TextUtil.getText(et_account);
+                if (TextUtil.notNull(zhanghao, "用户账号")) return;
+                //是否存在 true存在false不存在
+                HttpDataUtils.tbAppUsersGetList("UserName=" + "'" + zhanghao + "'", new IDataResultImpl<Boolean>() {
+                    @Override
+                    public void onSuccessData(Boolean data) {
+                        isZhangHao = data;
+                        if (data) {
+                            showToast("此账号已存在");
                         }
-                    });
-                }
-                break;
-            case R.id.et_phone:
-                if (!hasFocus) {
-                    final String phone = TextUtil.getText(et_phone);
-                    if (TextUtil.notNull(phone, "手机号")) return;
-                    if (!RegexUtils.isChinesePhoneNumber(phone)) {
+
+                    }
+                });
+            }
+        });
+        et_phone.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length() == 11) {
+                    if (!RegexUtils.isChinesePhoneNumber(s.toString())) {
                         showToast("手机格式不正确");
                         return;
                     }
                     //是否存在 true存在false不存在
-                    HttpDataUtils.tbAppUsersGetList("PHNo=" + "'" + phone + "'", new IDataResultImpl<Boolean>() {
+                    HttpDataUtils.tbAppUsersGetList("PHNo=" + "'" + s + "'", new IDataResultImpl<Boolean>() {
                         @Override
                         public void onSuccessData(Boolean data) {
                             isPhone = data;
@@ -119,8 +149,9 @@ public class RegisterActivity extends BaseActivity {
                         }
                     });
                 }
-                break;
-        }
+            }
+        });
+
     }
 
     @Event(R.id.et_xiangzhen)
