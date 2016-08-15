@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,7 +118,8 @@ public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.On
 
     @Event({R.id.tv_card, R.id.imgbt_search})
     private void searchOnClick(View view) {
-        if (!cardPop.isShowing())
+        if (cardPop == null) getCard();
+        else if (!cardPop.isShowing())
             cardPop.showAsDropDown(tv_card);
     }
 
@@ -184,8 +186,13 @@ public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.On
     }
 
     private void getCard() {
+        String userId = (String) SPUtils.get(this, Constants.ID, "");
+        if (TextUtils.isEmpty(userId)) {
+            showToast("请先登录");
+            return;
+        }
         showLoading();
-        HttpDataUtils.tbAppUsersExGetListByAppUsersID((String) SPUtils.get(WaterActivity.this, Constants.ID,""), new IDataResultImpl<List<Card>>() {
+        HttpDataUtils.tbAppUsersExGetListByAppUsersID(userId, new IDataResultImpl<List<Card>>() {
             @Override
             public void onSuccessData(List<Card> data) {
                 hideLoading();

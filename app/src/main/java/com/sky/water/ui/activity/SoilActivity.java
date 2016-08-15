@@ -173,7 +173,8 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
 
     @Event({R.id.tv_card, R.id.img_01})
     private void AreaOnClick(View view) {
-        if (!areaPop.isShowing())
+        if (areaPop == null) getArea();
+        else if (!areaPop.isShowing())
             areaPop.showAsDropDown(et_card);
     }
 

@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.TextUtils;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.TypedValue;
@@ -52,7 +53,7 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
 
     @ViewInject(R.id.tv_card)
     private TextView tv_card;
-//    @ViewInject(R.id.imgbt_search)
+    //    @ViewInject(R.id.imgbt_search)
 //    private ImageButton search;
     @ViewInject(R.id.balance)
     private TextView balance;
@@ -79,6 +80,7 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
         setToolbar();
         toRefresh();
         balance_01.setVisibility(View.GONE);
+
         getCard();
     }
 
@@ -132,9 +134,10 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
         });
     }
 
-    @Event({R.id.tv_card,R.id.imgbt_search})
+    @Event({R.id.tv_card, R.id.imgbt_search})
     private void searchOnClick(View view) {
-        if (!cardPop.isShowing())
+        if (cardPop == null) getCard();
+        else if (!cardPop.isShowing())
             cardPop.showAsDropDown(tv_card);
     }
 
@@ -229,9 +232,13 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
     }
 
     private void getCard() {
+        String userId = (String) SPUtils.get(this, Constants.ID, "");
+        if (TextUtils.isEmpty(userId)) {
+            showToast("请先登录");
+            return;
+        }
         showLoading();
-        HttpDataUtils.tbAppUsersExGetListByAppUsersID (
-                (String) SPUtils.get(BalanceActivity.this, Constants.ID,""), new IDataResultImpl<List<Card>>() {
+        HttpDataUtils.tbAppUsersExGetListByAppUsersID(userId, new IDataResultImpl<List<Card>>() {
             @Override
             public void onSuccessData(List<Card> data) {
                 hideLoading();

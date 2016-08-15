@@ -44,7 +44,6 @@ public class BindCardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolbar();
         setAdapter();
-
         userId = (String) SPUtils.get(BindCardActivity.this, Constants.ID, "");
         if (TextUtils.isEmpty(userId)) {
             showToast("请先登录");
@@ -133,7 +132,7 @@ public class BindCardActivity extends BaseActivity {
             }
         });
     }
-
+    //是否已绑定
     private void isBind(final String card, String treaName, String areaId) {
         HttpDataUtils.tbAppUsersExExistsName(treaName, areaId, card, new IDataResultImpl<String>() {
             @Override
@@ -146,9 +145,9 @@ public class BindCardActivity extends BaseActivity {
             }
         });
     }
-
+    //绑定卡号
     private void bindCard(String card) {
-        HttpDataUtils.tbAppUsersExAdd("1", card, new IDataResultImpl<String>() {
+        HttpDataUtils.tbAppUsersExAdd(userId, card, new IDataResultImpl<String>() {
             @Override
             public void onSuccessData(String data) {
                 if (data.contains("true")) {
