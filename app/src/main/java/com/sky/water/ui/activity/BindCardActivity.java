@@ -1,6 +1,8 @@
 package com.sky.water.ui.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -68,13 +70,24 @@ public class BindCardActivity extends BaseActivity {
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        unBindCard(datas.get(position).getID() + "");
+                        creatDialog(datas.get(position).getID() + "");
                     }
                 });
 
             }
         };
         recycle.setAdapter(adapter);
+
+    }
+
+    private void creatDialog(final String id) {
+        new AlertDialog.Builder(this).setTitle("确定删除").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                unBindCard(id);
+            }
+        }).setNegativeButton("取消", null).show();
+
 
     }
 
@@ -132,6 +145,7 @@ public class BindCardActivity extends BaseActivity {
             }
         });
     }
+
     //是否已绑定
     private void isBind(final String card, String treaName, String areaId) {
         HttpDataUtils.tbAppUsersExExistsName(treaName, areaId, card, new IDataResultImpl<String>() {
@@ -145,6 +159,7 @@ public class BindCardActivity extends BaseActivity {
             }
         });
     }
+
     //绑定卡号
     private void bindCard(String card) {
         HttpDataUtils.tbAppUsersExAdd(userId, card, new IDataResultImpl<String>() {
