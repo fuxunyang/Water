@@ -1,6 +1,8 @@
 package com.sky.water.ui.activity;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageButton;
@@ -91,7 +93,7 @@ public class UserActivity extends BaseActivity {
                 bt.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        unBindCard(datas.get(position).getID() + "");
+                        creatDialog(datas.get(position).getID() + "");
                     }
                 });
 
@@ -130,5 +132,16 @@ public class UserActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void creatDialog(final String id) {
+        new AlertDialog.Builder(this).setTitle("确定删除").setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                unBindCard(id);
+            }
+        }).setNegativeButton("取消", null).show();
+
+
     }
 }
