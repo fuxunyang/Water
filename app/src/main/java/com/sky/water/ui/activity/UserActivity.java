@@ -141,7 +141,5 @@ public class UserActivity extends BaseActivity {
                 unBindCard(id);
             }
         }).setNegativeButton("取消", null).show();
-
-
     }
 }
