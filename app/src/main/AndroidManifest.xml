@@ -50,6 +50,10 @@
             android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
+            android:name=".ui.activity.MainUserActivity"
+            android:label="@string/lable_main"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".ui.activity.NewsActivity"
             android:label="@string/lable_14"
             android:launchMode="singleTask"

@@ -22,11 +22,11 @@ public class User implements Serializable {
 //            "AreaLevel": "村",
 //            "Status": 1,
 //            "ParentName": "东二营"
+
     private String ID;
     private String TrueName;
     private String UserID;
     private String UserName;
-    private String Pwd;
     private String AreaID;
     private String PHNo;
     private String ZhenID;
@@ -37,6 +37,29 @@ public class User implements Serializable {
     private String AreaLevel;
     private String Status;
     private String ParentName;
+    /**
+     * ID : 7210648
+     * Password : S2SuUsBIVqXIgRe5LJlXkg==
+     * IdentityCard : 123456789123456789
+     * IPhone : 15900292608
+     * IsAuditing : true
+     * AreaId : 2
+     * RegisterTime : 2016-03-23T14:40:16.26
+     * UserRole : 1
+     * AreaName : 邦均镇
+     * ZhenID : 2
+     * ParentId : 1
+     * Status : 1
+     */
+
+    private String Password;
+    private String IdentityCard;
+    private String IPhone;
+    private boolean IsAuditing;
+    private int AreaId;
+    private String RegisterTime;
+    private int UserRole;
+    private String AreaName;
 
     public String getID() {
         return ID;
@@ -68,14 +91,6 @@ public class User implements Serializable {
 
     public void setUserName(String UserName) {
         this.UserName = UserName;
-    }
-
-    public String getPwd() {
-        return Pwd;
-    }
-
-    public void setPwd(String Pwd) {
-        this.Pwd = Pwd;
     }
 
     public String getAreaID() {
@@ -157,4 +172,69 @@ public class User implements Serializable {
     public void setParentName(String ParentName) {
         this.ParentName = ParentName;
     }
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String Password) {
+        this.Password = Password;
+    }
+
+    public String getIdentityCard() {
+        return IdentityCard;
+    }
+
+    public void setIdentityCard(String IdentityCard) {
+        this.IdentityCard = IdentityCard;
+    }
+
+    public String getIPhone() {
+        return IPhone;
+    }
+
+    public void setIPhone(String IPhone) {
+        this.IPhone = IPhone;
+    }
+
+    public boolean isIsAuditing() {
+        return IsAuditing;
+    }
+
+    public void setIsAuditing(boolean IsAuditing) {
+        this.IsAuditing = IsAuditing;
+    }
+
+    public int getAreaId() {
+        return AreaId;
+    }
+
+    public void setAreaId(int AreaId) {
+        this.AreaId = AreaId;
+    }
+
+    public String getRegisterTime() {
+        return RegisterTime;
+    }
+
+    public void setRegisterTime(String RegisterTime) {
+        this.RegisterTime = RegisterTime;
+    }
+
+    public int getUserRole() {
+        return UserRole;
+    }
+
+    public void setUserRole(int UserRole) {
+        this.UserRole = UserRole;
+    }
+
+    public String getAreaName() {
+        return AreaName;
+    }
+
+    public void setAreaName(String AreaName) {
+        this.AreaName = AreaName;
+    }
+
 }

@@ -61,6 +61,20 @@ public class HttpDataUtils extends HttpUtilsBase {
      * @param callback
      */
     public static void login(String name, String pass, final IDataResultImpl<User> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbFarmerLogin ");
+        params.addBodyParameter("userName", name);
+        params.addBodyParameter("passWord", pass);
+        params.setCharset("gbk");
+        x.http().post(params, new RequestCallBack<ApiResponse<List<User>>>(callback) {
+            @Override
+            public void onSuccess(ApiResponse<List<User>> result) {
+                if (result != null) callback.onSuccessData(result.getRows().get(0));
+                else callback.onSuccessData(null);
+            }
+        });
+    }
+
+    public static void oldLogin(String name, String pass, final IDataResultImpl<User> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/ManagerLogin");
         params.addBodyParameter("userName", name);
         params.addBodyParameter("passWord", pass);
@@ -77,7 +91,7 @@ public class HttpDataUtils extends HttpUtilsBase {
     /**
      * 是否存在 true存在false不存在
      *
-     * @param where 姓名
+     * @param where    姓名
      * @param callback
      */
     public static void tbAppUsersGetList(String where, final IDataResultImpl<Boolean> callback) {

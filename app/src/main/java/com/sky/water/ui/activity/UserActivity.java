@@ -55,7 +55,7 @@ public class UserActivity extends BaseActivity {
         setText();
         setAdapter();
 
-        userId = (String) SPUtils.get(this, Constants.ID, "");
+        userId = (String) SPUtils.getInstance().get(Constants.ID, "");
         if (TextUtils.isEmpty(userId)) {
             showToast("请先登录");
             return;
@@ -64,16 +64,16 @@ public class UserActivity extends BaseActivity {
     }
 
     private void setText() {
-        etReal.setText((String) SPUtils.get(this, Constants.TrueName, ""));
-        et_nick.setText((String) SPUtils.get(this, Constants.UserName, ""));
-        et_xiangzhen.setText((String) SPUtils.get(this, Constants.ParentName, ""));
-        et_cunzhuang.setText((String) SPUtils.get(this, Constants.Name, ""));
-        et_phone.setText((String) SPUtils.get(this, Constants.PHNo, ""));
+        etReal.setText((String) SPUtils.getInstance().get(Constants.TrueName, ""));
+        et_nick.setText((String) SPUtils.getInstance().get(Constants.UserName, ""));
+        et_xiangzhen.setText((String) SPUtils.getInstance().get(Constants.ParentName, ""));
+        et_cunzhuang.setText((String) SPUtils.getInstance().get(Constants.Name, ""));
+        et_phone.setText((String) SPUtils.getInstance().get(Constants.PHNo, ""));
     }
 
     @Event(R.id.bt_Cancellation)
-    private void cacelOnClick(View view) {
-        SPUtils.clear(this);
+    private void cancelOnClick(View view) {
+        SPUtils.getInstance().clear();
         finish();
     }
 

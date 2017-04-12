@@ -46,7 +46,7 @@ public class BindCardActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolbar();
         setAdapter();
-        userId = (String) SPUtils.get(BindCardActivity.this, Constants.ID, "");
+        userId = (String) SPUtils.getInstance().get(Constants.ID, "");
         if (TextUtils.isEmpty(userId)) {
             showToast("请先登录");
             return;
@@ -126,8 +126,8 @@ public class BindCardActivity extends BaseActivity {
     private void onClick(View view) {
         final String card = TextUtil.getText(edCard);
         if (TextUtil.notNull(card, "卡号")) return;
-        final String treaName = (String) SPUtils.get(BindCardActivity.this, Constants.TrueName, "");
-        final String areaId = (String) SPUtils.get(BindCardActivity.this, Constants.AreaID, "");
+        final String treaName = (String) SPUtils.getInstance().get(Constants.TrueName, "");
+        final String areaId = (String) SPUtils.getInstance().get(Constants.AreaID, "");
 
         if (treaName == null || treaName.length() == 0 || areaId == null || areaId.length() == 0) {
             showToast("请先登录");

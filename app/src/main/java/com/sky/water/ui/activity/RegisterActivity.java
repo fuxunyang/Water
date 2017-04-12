@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.sky.utils.ActivityLifecycle;
+import com.sky.utils.JumpAct;
 import com.sky.utils.TextUtil;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
@@ -246,7 +246,12 @@ public class RegisterActivity extends BaseActivity {
                 showToast(getString(R.string.success));
                 setUserOnlineState(true);
                 SPUtils.put(RegisterActivity.this, SPUtils.getValue(data));
-                ActivityLifecycle.getInstance().backToAppointActivity(MainActivity.class);
+                if (data.getUserRole() == 1)
+                    JumpAct.jumpActivity(RegisterActivity.this, MainActivity.class);
+                else
+                    JumpAct.jumpActivity(RegisterActivity.this, MainUserActivity.class);
+//                ActivityLifecycle.getInstance().backToAppointActivity(MainActivity.class);
+                finish();
             }
         });
     }

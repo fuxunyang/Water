@@ -232,7 +232,7 @@ public class BalanceActivity extends BaseActivity implements SwipeRefreshLayout.
     }
 
     private void getCard() {
-        String userId = (String) SPUtils.get(this, Constants.ID, "");
+        String userId = (String) SPUtils.getInstance().get(Constants.ID, "");
         if (TextUtils.isEmpty(userId)) {
             showToast("请先登录");
             return;

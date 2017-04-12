@@ -3,6 +3,7 @@ package com.sky.water.ui;
 import android.app.Application;
 
 import com.sky.utils.ActivityLifecycle;
+import com.sky.utils.SPUtils;
 import com.sky.water.BuildConfig;
 import com.sky.water.utils.ToastUtils;
 
@@ -27,6 +28,7 @@ public class MyApplication extends Application {
         instance = this;
         x.Ext.init(this);
         x.Ext.setDebug(BuildConfig.DEBUG);
+        SPUtils.init(this);
         // 初始化自定义Activity管理器
         registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());
     }

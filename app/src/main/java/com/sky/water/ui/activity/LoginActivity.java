@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
+import com.sky.utils.JumpAct;
 import com.sky.utils.SPUtils;
 import com.sky.water.BuildConfig;
 import com.sky.water.R;
@@ -19,6 +19,7 @@ import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
 
+
 /**
  * @author sky QQ:1136096189
  * @Description: TODO
@@ -30,15 +31,14 @@ public class LoginActivity extends BaseActivity {
     private EditText et_name;
     @ViewInject(R.id.et_pass)
     private EditText et_pass;
-    @ViewInject(R.id.bt_login)
-    private Button login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (BuildConfig.DEBUG) {
-            et_name.setText("l");
-            et_pass.setText("l");
+//            et_name.setText("fuxy");
+            et_name.setText("a1");
+            et_pass.setText("1");
         }
     }
 
@@ -59,9 +59,13 @@ public class LoginActivity extends BaseActivity {
                     showToast(getString(R.string.error_02));
                     return;
                 }
-                showToast(getString(R.string.success));
+                SPUtils.getInstance().put(SPUtils.getInstance().getValue(data));
                 setUserOnlineState(true);
-                SPUtils.put(LoginActivity.this,SPUtils.getValue(data));
+                showToast(getString(R.string.success));
+                if (data.getUserRole() == 1)
+                    JumpAct.jumpActivity(LoginActivity.this, MainActivity.class);
+                else
+                    JumpAct.jumpActivity(LoginActivity.this, MainUserActivity.class);
                 finish();
             }
         });

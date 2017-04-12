@@ -8,9 +8,9 @@ import android.view.animation.Animation.AnimationListener;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.sky.utils.SPUtils;
 import com.sky.water.R;
 import com.sky.water.ui.BaseActivity;
-import com.sky.water.utils.SPUtils;
 
 /**
  * @author LiBin
@@ -20,7 +20,7 @@ import com.sky.water.utils.SPUtils;
  */
 public class WelcomeActivity extends BaseActivity {
 
-    public Boolean flag;//是否首次运行，true代表首次
+    public int flag;//是否首次运行，true代表首次
     private int TIME = 400;//handler延迟时间
 
     @Override
@@ -32,7 +32,7 @@ public class WelcomeActivity extends BaseActivity {
         view.setBackgroundResource(R.mipmap.welcome);
         setContentView(view);
         //SPUtils.put(WelcomeActivity.this, "isfirst", true);
-        flag = (Boolean) SPUtils.get(this, "isfirst", true);
+        flag = (int) SPUtils.getInstance().get("UserRole", 0);
         //加载动画
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
         view.startAnimation(animation);
@@ -53,13 +53,16 @@ public class WelcomeActivity extends BaseActivity {
                     @Override
                     public void run() {
                         // 判断程序与第几次运行，如果是第一次运行引导页面
-//                        if (flag) {
-//                            jumpActivity(WelcomeActivity.this, IntroductoryActivity.class);
-//                            finish();
-//                        } else {
+                        if (!getUserOnlineState()) {
+                            jumpActivity(WelcomeActivity.this, LoginActivity.class);
+                            finish();
+                        } else if (flag == 1) {
                             jumpActivity(WelcomeActivity.this, MainActivity.class);
                             finish();
-//                        }
+                        } else {
+                            jumpActivity(WelcomeActivity.this, MainUserActivity.class);
+                            finish();
+                        }
                     }
                 }, TIME);
             }
