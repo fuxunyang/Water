@@ -1,16 +1,22 @@
 package com.sky.water.ui.activity;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Message;
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.sky.utils.TextUtil;
@@ -91,6 +97,7 @@ public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayo
         adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                showDialog(adapter.getDatas().get(position));
             }
 
             @Override
@@ -115,6 +122,28 @@ public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayo
                 //  dx：大于0，向右滚动    小于0，向左滚动
                 //  dy：大于0，向上滚动    小于0，向下滚动
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
+            }
+        });
+    }
+
+    private void showDialog(WaterEntity entity) {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_water, null);// 得到加载view
+        ((TextView) view.findViewById(R.id.tv_title)).setText(entity.getName());
+        ((TextView) view.findViewById(R.id.tv_well)).setText(entity.getMachineWellsNum());
+        ((TextView) view.findViewById(R.id.tv_well_begin)).setText(entity.getBeginTime());
+        ((TextView) view.findViewById(R.id.tv_well_end)).setText(entity.getEndTime());
+        ((TextView) view.findViewById(R.id.tv_total01)).setText(entity.getOneTotalWater());
+        ((TextView) view.findViewById(R.id.tv_total)).setText(entity.getWellTotalWater());
+
+        final Dialog dialog = new Dialog(this);
+        int[] wh = ScreenUtils.getWidthAndHeight(this);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(wh[0] / 5 * 4, wh[1] / 2);
+        dialog.setContentView(view, lp);
+        dialog.show();
+        view.findViewById(R.id.bt_know).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
