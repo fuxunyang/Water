@@ -6,21 +6,22 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sky.utils.TextUtil;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
 import com.sky.water.model.ApiResponse;
 import com.sky.water.model.AreaEntity;
-import com.sky.water.model.SoilEntity;
+import com.sky.water.model.WaterEntity;
 import com.sky.water.ui.BaseActivity;
 import com.sky.water.ui.BaseAdapter;
-import com.sky.water.ui.adapter.SoilAdapter;
+import com.sky.water.ui.adapter.WaterAdapter;
 import com.sky.water.ui.dialog.AreaPop;
 import com.sky.water.ui.dialog.BasePop;
 import com.sky.water.utils.ScreenUtils;
@@ -37,64 +38,35 @@ import java.util.List;
  * @Description: TODO
  * @date 16/1/21 下午4:32
  */
-@ContentView(R.layout.activity_soil)
-public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
-    @ViewInject(R.id.tv_card)
-    private TextView et_card;
-    @ViewInject(R.id.img_01)
-    private ImageView img_01;
-//    @ViewInject(R.id.imgbt_search)
-//    private ImageButton search;
+@ContentView(R.layout.activity_wateradmin)
+public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    @ViewInject(R.id.bt_temp)
-    private Button bt_temp;
-    @ViewInject(R.id.bt_water)
-    private Button bt_water;
-    @ViewInject(R.id.tv_temporwater)
-    private TextView tv_temporwater;
-
+    @ViewInject(R.id.tv_area)
+    private TextView tv_area;
+    @ViewInject(R.id.tv_well)
+    private EditText tvWell;
 
     @ViewInject(R.id.swipe)//下拉刷新的框架
     private SwipeRefreshLayout swipe;
     @ViewInject(R.id.recycle)
     private RecyclerView recyclerView;
     private LinearLayoutManager mLayoutManager;
-    private SoilAdapter adapter;
+    private WaterAdapter adapter;
     private int lastVisibleItem;
-
+    private int total = 0;
+    private int page = 1;
     private BasePop areaPop;
     private List<AreaEntity> areas;
-    private int total = 0;
-    private boolean isDown;
-//    private String areaID;
+
+    private String parentId;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbar();
         toRefresh();
-
         getArea();
-        bt_temp.setBackgroundResource(R.mipmap.ic_soil_pressed);
-    }
-
-    private void getArea() {
-        showLoading();
-        HttpDataUtils.getArea(new IDataResultImpl<List<AreaEntity>>() {
-            @Override
-            public void onSuccessData(List<AreaEntity> data) {
-                hideLoading();
-                if (data == null) {
-                    showToast(getString(R.string.error_03));
-                    return;
-                }
-                areas = data;
-                et_card.setText(data.get(0).getName());
-                createAreaShowFloder(data);
-                if (!areaPop.isShowing())
-                    areaPop.showAsDropDown(et_card);
-            }
-        });
     }
 
     /**
@@ -111,16 +83,14 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         swipe.setOnRefreshListener(this);//监听
 
         recyclerView.setHasFixedSize(true);
-        adapter = new SoilAdapter(R.layout.adapter_soil_item);
+        adapter = new WaterAdapter(R.layout.adapter_water_item);
+        adapter.setUserOnlineState(getUserOnlineState());
         recyclerView.setAdapter(adapter);
 
         mLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
         adapter.setOnItemClickListener(new BaseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
-                jumpActivity(SoilActivity.this, LineChartActivity.class,
-                        "id", adapter.getDatas().get(position).getID(),
-                        "tempOrWater", adapter.getTempOrWater() + "");
             }
 
             @Override
@@ -135,7 +105,7 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItem + 1 == adapter.getItemCount()) {
                     if (total > adapter.getItemCount()) handler.sendEmptyMessageDelayed(1, 000);
-                    else if (isDown) showToast("已无更多");
+                    else showToast("已无更多");
                 }
             }
 
@@ -144,74 +114,41 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
                 super.onScrolled(recyclerView, dx, dy);
                 //  dx：大于0，向右滚动    小于0，向左滚动
                 //  dy：大于0，向上滚动    小于0，向下滚动
-                if (dy < 0) isDown = true;
-                else isDown = false;
-
                 lastVisibleItem = mLayoutManager.findLastVisibleItemPosition();
             }
         });
     }
 
-//    @Event(R.id.imgbt_search)
-//    private void searchOnClick(View view) {
-//        getSoils();
-//    }
-
-//    private void getSoils() {
-//        String areaName = et_card.getText().toString().trim();
-//        if (TextUtils.isEmpty(areaName)) {
-//            showToast("地名不能为空");
-//            return;
-//        }
-////        for (AreaEntity area : areas) {
-////            if (area.getName().contains(areaName)) {
-////                getSoil(area.getID() + "");
-////                return;
-////            }
-////        }
-//    }
-
-    @Event({R.id.tv_card, R.id.img_01})
-    private void AreaOnClick(View view) {
+    @Event({R.id.tv_card, R.id.imgbt_search})
+    private void searchOnClick(View view) {
         if (areaPop == null) getArea();
         else if (!areaPop.isShowing())
-            areaPop.showAsDropDown(et_card);
+            areaPop.showAsDropDown(tv_area);
     }
 
-    @Event({R.id.bt_temp, R.id.bt_water})
-    private void tempORWaterOnClick(View view) {
-        switch (view.getId()) {
-            case R.id.bt_temp:
-                tv_temporwater.setText(getString(R.string.list_10));
-                bt_temp.setBackgroundResource(R.mipmap.ic_soil_pressed);
-                bt_water.setBackgroundResource(R.mipmap.ic_soil_normal);
-                adapter.setTempOrWater(1);
-
-                break;
-            case R.id.bt_water:
-                tv_temporwater.setText(getString(R.string.list_11));
-                bt_temp.setBackgroundResource(R.mipmap.ic_soil_normal);
-                bt_water.setBackgroundResource(R.mipmap.ic_soil_pressed);
-                adapter.setTempOrWater(2);
-                break;
-
-        }
+    @Event(R.id.img_search)
+    private void OnClick(View view) {
+        getData();
     }
 
-    private void getSoil(String areaId) {
+
+    private void getData() {
+        String well = tvWell.getText().toString().trim();
+        if (TextUtil.notNull(parentId, "请选择区域")) return;
+//        if (TextUtil.notNull(well, "请填写机井编号")) return;
         showLoading();
-        HttpDataUtils.getSoil(areaId, new IDataResultImpl<ApiResponse<List<SoilEntity>>>() {
+        HttpDataUtils.getWaterAdmin(parentId, well, page + "", new IDataResultImpl<ApiResponse<List<WaterEntity>>>() {
             @Override
-            public void onSuccessData(ApiResponse<List<SoilEntity>> data) {
+            public void onSuccessData(ApiResponse<List<WaterEntity>> data) {
                 hideLoading();
                 if (data == null) {
                     showToast(getString(R.string.error_03));
                     return;
                 }
                 total = data.getTotal();
-                adapter.setDatas(data.getRows());
-//                if (page == 1) adapter.setDatas(data.getRows());
-//                else adapter.addDatas(data.getRows());
+                if (page == 1) adapter.setDatas(data.getRows());
+                else adapter.addDatas(data.getRows());
+
             }
         });
     }
@@ -227,16 +164,15 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
         super.handler(msg);
         switch (msg.what) {
             case 0:
+                page = 1;
+                getData();
                 swipe.setRefreshing(false);
                 break;
             case 1:
+                page++;
+                getData();
                 setSnack(recyclerView);
-//                getSoils();
                 break;
-            case 0x99:
-                getSoil(msg.arg1 + "");
-                break;
-
         }
     }
 
@@ -247,14 +183,32 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
      */
     public void setSnack(final View view) {
         Snackbar.make(view, "正在加载，请稍后", Snackbar.LENGTH_SHORT)
-                .setAction("cancel", new View.OnClickListener() {
+                .setAction("ok", new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        showToast("已取消");
+                        showToast("正在加载，请稍后");
                     }
                 }).show();
     }
 
+    private void getArea() {
+        showLoading();
+        HttpDataUtils.getArea(new IDataResultImpl<List<AreaEntity>>() {
+            @Override
+            public void onSuccessData(List<AreaEntity> data) {
+                hideLoading();
+                if (data == null) {
+                    showToast(getString(R.string.error_03));
+                    return;
+                }
+                areas = data;
+                tv_area.setText(data.get(0).getName());
+                createAreaShowFloder(data);
+                if (!areaPop.isShowing())
+                    areaPop.showAsDropDown(tv_area);
+            }
+        });
+    }
 
     private void createAreaShowFloder(final List<AreaEntity> datas) {
         int[] wh = ScreenUtils.getWidthAndHeight(this);
@@ -266,11 +220,8 @@ public class SoilActivity extends BaseActivity implements SwipeRefreshLayout.OnR
             @Override
             public void onItemClick(int position) {
                 AreaEntity data = datas.get(position);
-                et_card.setText(data.getName());
-                Message message = handler.obtainMessage();
-                message.what = 0x99;
-                message.arg1 = data.getID();
-                handler.sendMessage(message);
+                tv_area.setText(data.getName());
+                parentId = data.getID() + "";
                 areaPop.dismiss();
             }
         });

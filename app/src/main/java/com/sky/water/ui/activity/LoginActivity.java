@@ -6,6 +6,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import com.sky.utils.ActivityLifecycle;
 import com.sky.utils.JumpAct;
 import com.sky.utils.SPUtils;
 import com.sky.water.BuildConfig;
@@ -36,8 +37,8 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (BuildConfig.DEBUG) {
-//            et_name.setText("fuxy");
-            et_name.setText("a1");
+            et_name.setText("fuxy");
+//            et_name.setText("a1");
             et_pass.setText("1");
         }
     }
@@ -99,5 +100,11 @@ public class LoginActivity extends BaseActivity {
 
         }
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        ActivityLifecycle.getInstance().popAllActivity();
     }
 }

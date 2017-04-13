@@ -11,7 +11,7 @@
     <color name="alpha_66">#66FFFFFF</color><!--红色 -->
     <color name="alpha_dd">#ddFFFFFF</color><!--红色 -->
     <color name="alpha_44">#44FFFFFF</color><!--红色 -->
-    <color name="darkgray">#999999</color>
+    <color name="darkgray">#bbbbbb</color>
     <color name="lightgray">#dddddd</color><!--浅灰-->
     <color name="red">#ff0000</color>
     <color name="green">#e4048f51</color>

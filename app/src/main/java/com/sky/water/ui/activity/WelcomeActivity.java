@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import com.sky.utils.SPUtils;
 import com.sky.water.R;
+import com.sky.water.common.Constants;
 import com.sky.water.ui.BaseActivity;
 
 /**
@@ -32,7 +33,7 @@ public class WelcomeActivity extends BaseActivity {
         view.setBackgroundResource(R.mipmap.welcome);
         setContentView(view);
         //SPUtils.put(WelcomeActivity.this, "isfirst", true);
-        flag = (int) SPUtils.getInstance().get("UserRole", 0);
+        flag = (int) SPUtils.getInstance().get(Constants.USERROLE, 0);
         //加载动画
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.alpha);
         view.startAnimation(animation);

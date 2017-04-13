@@ -38,10 +38,13 @@ public class WaterAdapter extends BaseAdapter<WaterEntity, BaseHolder> {
         //Name为所属区域，CollectDate为采集时间，
         // WellTotalWater为总用水量，MachineWellsNum为机井编号（名称），
         // balance为当前余额，total为全部数据总条数。
+        TextView local = holder.getView(R.id.tv_local);
         holder.setText(R.id.tv_local, datas.get(position).getName());
         holder.setText(R.id.tv_time, datas.get(position).getCollectDate());
 //        holder.setText(R.id.tv_water_use, datas.get(position).getWaterValue());
-        ((TextView) holder.getView(R.id.tv_total_water)).setTextColor(((TextView) holder.getView(R.id.tv_local)).getTextColors());
+        TextView total = holder.getView(R.id.tv_total_water);
+        total.setTextColor(local.getTextColors());
+
         if (userOnlineState && !datas.get(position).getWellTotalWaterThreshold().equals("1"))
             ((TextView) holder.getView(R.id.tv_total_water)).setTextColor(
                     context.getResources().getColor(R.color.red));

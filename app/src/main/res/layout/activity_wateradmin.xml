@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:sky="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/activity_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightgray"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="2">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_16"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv001"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/padding_4"
+                android:text="所属区域"
+                android:textSize="@dimen/medium" />
+
+            <TextView
+                android:id="@+id/tv_area"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv001"
+                android:layout_alignTop="@id/tv001"
+                android:layout_toRightOf="@id/tv001"
+                android:background="@color/white"
+                android:gravity="center"
+                android:lines="1" />
+
+
+            <ImageView
+                android:id="@id/imgbt_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv001"
+                android:layout_alignTop="@id/tv001"
+                android:layout_toRightOf="@id/tv_area"
+                android:background="@color/black"
+                android:src="@mipmap/ic_menu_trangle_down" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv_002"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/padding_4"
+                android:text="机井编号"
+                android:textSize="@dimen/medium" />
+
+            <EditText
+                android:id="@+id/tv_well"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_002"
+                android:layout_alignTop="@id/tv_002"
+                android:layout_toRightOf="@id/tv_002"
+                android:background="@color/white"
+                android:gravity="center"
+                android:lines="1" />
+
+            <ImageView
+                android:id="@+id/img_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv_002"
+                android:layout_alignTop="@id/tv_002"
+                android:layout_toRightOf="@id/tv_well"
+                android:background="@color/black"
+                android:src="@mipmap/ic_search_category_default" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/darkgray"
+        android:orientation="horizontal"
+        sky:divider="@drawable/action_line_v"
+        sky:showDividers="middle">
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_01" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_02" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_03"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/list_style"
+            android:text="@string/list_04" />
+
+    </android.support.v7.widget.LinearLayoutCompat>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@id/swipe"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.sky.water.ui.widget.MyRecycleView
+            android:id="@id/recycle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

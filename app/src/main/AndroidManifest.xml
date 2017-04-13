@@ -52,6 +52,7 @@
         <activity
             android:name=".ui.activity.MainUserActivity"
             android:label="@string/lable_main"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.NewsActivity"
@@ -72,6 +73,10 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".ui.activity.WaterActivity"
+            android:label="@string/lable_04"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.WaterAdminActivity"
             android:label="@string/lable_04"
             android:screenOrientation="portrait" />
         <activity
@@ -96,6 +101,10 @@
         <activity
             android:name=".ui.activity.UserActivity"
             android:label="@string/lable_13"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.activity.AgricultureActivity"
+            android:label="@string/lable_007"
             android:screenOrientation="portrait" />
     </application>
 

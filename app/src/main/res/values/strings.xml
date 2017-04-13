@@ -11,6 +11,7 @@
     <string name="lable_05">余额查询</string>
     <string name="lable_006">绑定卡号</string>
     <string name="lable_06">农田灌溉</string>
+    <string name="lable_007">农技推送</string>
     <string name="lable_07">农村排水</string>
     <string name="lable_08">农村供水</string>
     <string name="lable_09">水环境</string>
@@ -61,6 +62,7 @@
     <string name="error_01">账号或密码错误</string>
     <string name="error_02">登录失败</string>
     <string name="error_03">请求失败</string>
+    <string name="error_04">请绑卡</string>
     <string name="success">登录成功</string>
     <string name="down_check">下载失败，请检查网络连接</string>
     <string name="down_checksd">下载失败，请检查sd卡是否存在</string>

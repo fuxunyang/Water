@@ -21,6 +21,7 @@ public class Constants {
     public static final String PHNo="pHNo";
     public static final String Name="name";
     public static final String ParentName="parentName";
+    public static final String USERROLE="userRole";//0用户1管理员
 
 
     public static final String AK = "6tYzTvGZSOpYB5Oc2YGGOKt8";

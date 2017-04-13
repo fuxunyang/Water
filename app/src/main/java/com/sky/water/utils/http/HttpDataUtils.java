@@ -332,7 +332,77 @@ public class HttpDataUtils extends HttpUtilsBase {
     }
 
     /**
-     * 获取灌溉水量
+     * 获取灌溉水量 用户
+     *
+     * @param WellNumber
+     * @param page
+     * @param callback
+     * @return
+     */
+    public static RequestHandler getWater(String WellNumber, String page, final IDataResultImpl<ApiResponse<List<WaterEntity>>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/GettbMachineWellsCommunicationTotalWaterRecordWellNumber");
+        params.addBodyParameter("WellNumber", WellNumber);
+        params.addBodyParameter("page", page);
+        params.setCharset("gbk");
+//        params.addHeader();
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<ApiResponse<List<WaterEntity>>>(callback) {
+                    @Override
+                    public void onSuccess(ApiResponse<List<WaterEntity>> result) {
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    /**
+     * 获取灌溉水量 管理者
+     *
+     * @param ParentId
+     * @param WellNumber
+     * @param page
+     * @param callback
+     * @return
+     */
+    public static RequestHandler getWaterAdmin(String ParentId, String WellNumber, String page, final IDataResultImpl<ApiResponse<List<WaterEntity>>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/GettbMachineWellsCommunicationTotalWaterRecordWellNumberBJ");
+        params.addBodyParameter("ParentId", ParentId);
+        params.addBodyParameter("WellNumber", WellNumber);
+        params.addBodyParameter("page", page);
+        params.setCharset("gbk");
+//        params.addHeader();
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<ApiResponse<List<WaterEntity>>>(callback) {
+                    @Override
+                    public void onSuccess(ApiResponse<List<WaterEntity>> result) {
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    /**
+     * 获取余额
      *
      * @param cardNO
      * @param callback

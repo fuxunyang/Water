@@ -197,7 +197,7 @@ public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.On
             public void onSuccessData(List<Card> data) {
                 hideLoading();
                 if (data == null) {
-                    showToast(getString(R.string.error_03));
+                    showToast(getString(R.string.error_04));
                     return;
                 }
                 tv_card.setText(data.get(0).getMachineNo());

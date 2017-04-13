@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.sky.utils.JumpAct;
 import com.sky.utils.SPUtils;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
@@ -74,6 +75,7 @@ public class UserActivity extends BaseActivity {
     @Event(R.id.bt_Cancellation)
     private void cancelOnClick(View view) {
         SPUtils.getInstance().clear();
+        JumpAct.jumpActivity(this,LoginActivity.class);
         finish();
     }
 

@@ -12,7 +12,6 @@ import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.sky.water.R;
 import com.sky.water.api.IDataResult;
@@ -26,7 +25,6 @@ import org.json.JSONObject;
 import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
-import org.xutils.view.annotation.ViewInject;
 
 import java.io.File;
 
@@ -39,20 +37,6 @@ import java.io.File;
 public class MainUserActivity extends BaseActivity {
 
     public static boolean flag = true;
-
-    @ViewInject(R.id.lable_01)
-    private RelativeLayout lable_01;
-    @ViewInject(R.id.lable_02)
-    private RelativeLayout lable_02;
-    @ViewInject(R.id.lable_03)
-    private RelativeLayout lable_03;
-    @ViewInject(R.id.lable_04)
-    private RelativeLayout lable_04;
-    @ViewInject(R.id.lable_05)
-    private RelativeLayout lable_05;
-    @ViewInject(R.id.lable_006)
-    private RelativeLayout lable_006;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -204,11 +188,10 @@ public class MainUserActivity extends BaseActivity {
         }
     }
 
-    @Event({R.id.lable_01, R.id.lable_02, R.id.lable_03, R.id.lable_04, R.id.lable_05, R.id.lable_006})
+    @Event({R.id.lable_02, R.id.lable_03, R.id.lable_04, R.id.lable_05, R.id.lable_006, R.id.lable_07})
     private void tabOnClick(View v) {
 
-        if (v.getTag().equals(getString(R.string.lable_01))) {
-        } else if (v.getTag().equals(getString(R.string.lable_02))) {
+        if (v.getTag().equals(getString(R.string.lable_02))) {
             jumpActivity(MainUserActivity.this, WeatherActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_03))) {
             jumpActivity(MainUserActivity.this, SoilActivity.class);
@@ -218,6 +201,8 @@ public class MainUserActivity extends BaseActivity {
             jumpActivity(MainUserActivity.this, BalanceActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_006))) {
             jumpActivity(MainUserActivity.this, BindCardActivity.class);
+        } else if (v.getTag().equals(getString(R.string.lable_007))) {
+            jumpActivity(MainUserActivity.this, AgricultureActivity.class);
         }
     }
 }

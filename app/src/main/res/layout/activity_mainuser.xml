@@ -21,25 +21,6 @@
         android:weightSum="4">
 
         <RelativeLayout
-            android:id="@+id/lable_01"
-            style="@style/user_layout_style"
-            android:tag="@string/lable_01">
-
-            <ImageView
-                android:id="@+id/lable_01_img"
-                style="@style/menu_image_style"
-                android:background="@mipmap/ic_menu_01" />
-
-            <TextView
-                android:id="@+id/lable_01_tv"
-                style="@style/menu_text_style"
-                android:layout_alignLeft="@+id/lable_01_img"
-                android:layout_alignRight="@+id/lable_01_img"
-                android:layout_below="@+id/lable_01_img"
-                android:text="@string/lable_01" />
-        </RelativeLayout>
-
-        <RelativeLayout
             android:id="@+id/lable_02"
             style="@style/user_layout_style"
             android:tag="@string/lable_02">
@@ -96,15 +77,6 @@
                 android:text="@string/lable_04" />
         </RelativeLayout>
 
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
-        android:orientation="horizontal"
-        android:weightSum="7">
-
         <RelativeLayout
             android:id="@+id/lable_05"
             style="@style/user_layout_style"
@@ -123,6 +95,15 @@
                 android:layout_below="@+id/lable_05_img"
                 android:text="@string/lable_05" />
         </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16"
+        android:orientation="horizontal"
+        android:weightSum="7">
+
 
         <RelativeLayout
             android:id="@+id/lable_006"
@@ -141,6 +122,26 @@
                 android:layout_alignRight="@+id/lable_006_img"
                 android:layout_below="@+id/lable_006_img"
                 android:text="@string/lable_006" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lable_07"
+            style="@style/user_layout_style"
+            android:tag="@string/lable_01">
+
+            <ImageView
+                android:id="@+id/lable_07_img"
+                style="@style/menu_image_style"
+                android:background="@mipmap/ic_menu_07" />
+
+            <TextView
+                android:id="@+id/lable_01_tv"
+                style="@style/menu_text_style"
+                android:layout_alignLeft="@+id/lable_07_img"
+                android:layout_alignRight="@+id/lable_07_img"
+                android:layout_below="@+id/lable_07_img"
+                android:text="@string/lable_007" />
         </RelativeLayout>
     </LinearLayout>
 
