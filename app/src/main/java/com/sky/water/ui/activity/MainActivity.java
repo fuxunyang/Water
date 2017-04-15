@@ -107,8 +107,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
-
             }
         });
     }
@@ -219,9 +217,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.lable_10:
                 replaceFragment(new NewsFragment().setType(NewsFragment.FIVE), lable_10);
                 break;
-
         }
-
     }
 
     private void replaceFragment(Fragment fragment, RelativeLayout lable) {

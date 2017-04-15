@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity {
 //            et_name.setText("a1");
             et_pass.setText("1");
         }
+        ActivityLifecycle.getInstance().keepCurrentActivity();
     }
 
     @Event(R.id.bt_login)
@@ -97,7 +98,6 @@ public class LoginActivity extends BaseActivity {
                     finish();
                 }
                 break;
-
         }
         return super.onTouchEvent(event);
     }
@@ -105,6 +105,5 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ActivityLifecycle.getInstance().popAllActivity();
     }
 }
