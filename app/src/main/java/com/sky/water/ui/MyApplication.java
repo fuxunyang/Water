@@ -9,6 +9,8 @@ import com.sky.water.utils.ToastUtils;
 
 import org.xutils.x;
 
+import cn.bmob.v3.Bmob;
+
 
 /**
  * @author sky QQ:1136096189
@@ -31,6 +33,8 @@ public class MyApplication extends Application {
         SPUtils.init(this);
         // 初始化自定义Activity管理器
         registerActivityLifecycleCallbacks(ActivityLifecycle.getInstance());
+        Bmob.initialize(this, "912eeae77d61f9f34c809772eb299b6c");
+
     }
 
     public void exit() {

@@ -121,5 +121,24 @@
             android:text="@string/lable_006" />
     </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/lable_007"
+        style="@style/menu_layout_style"
+        android:tag="@string/lable_007">
+
+        <ImageView
+            android:id="@+id/lable_007_img"
+            style="@style/menu_image_style"
+            android:background="@mipmap/ic_menu_07" />
+
+        <TextView
+            android:id="@+id/lable_07_tv"
+            style="@style/menu_text_style"
+            android:layout_alignLeft="@+id/lable_007_img"
+            android:layout_alignRight="@+id/lable_007_img"
+            android:layout_below="@+id/lable_007_img"
+            android:text="@string/lable_007" />
+    </RelativeLayout>
+
 
 </LinearLayout>

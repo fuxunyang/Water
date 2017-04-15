@@ -128,7 +128,7 @@
         <RelativeLayout
             android:id="@+id/lable_07"
             style="@style/user_layout_style"
-            android:tag="@string/lable_01">
+            android:tag="@string/lable_007">
 
             <ImageView
                 android:id="@+id/lable_07_img"

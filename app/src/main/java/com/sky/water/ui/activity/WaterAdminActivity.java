@@ -90,7 +90,6 @@ public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayo
 
         recyclerView.setHasFixedSize(true);
         adapter = new WaterAdapter(R.layout.adapter_water_item);
-        adapter.setUserOnlineState(getUserOnlineState());
         recyclerView.setAdapter(adapter);
 
         mLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();

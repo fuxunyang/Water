@@ -4,7 +4,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.sky.utils.SPUtils;
 import com.sky.water.R;
+import com.sky.water.common.Constants;
 import com.sky.water.model.WaterEntity;
 import com.sky.water.ui.BaseAdapter;
 import com.sky.water.ui.BaseHolder;
@@ -16,7 +18,7 @@ import com.sky.water.ui.BaseHolder;
  * @date 15/12/9 下午8:52
  */
 public class WaterAdapter extends BaseAdapter<WaterEntity, BaseHolder> {
-    private boolean userOnlineState = false;//是否超标
+//    private boolean userOnlineState = false;//是否超标
 
     public WaterAdapter(int layoutId) {
         super(layoutId);
@@ -43,15 +45,18 @@ public class WaterAdapter extends BaseAdapter<WaterEntity, BaseHolder> {
         holder.setText(R.id.tv_time, datas.get(position).getCollectDate());
 //        holder.setText(R.id.tv_water_use, datas.get(position).getWaterValue());
         TextView total = holder.getView(R.id.tv_total_water);
-        total.setTextColor(local.getTextColors());
-
-        if (userOnlineState && !datas.get(position).getWellTotalWaterThreshold().equals("1"))
-            ((TextView) holder.getView(R.id.tv_total_water)).setTextColor(
-                    context.getResources().getColor(R.color.red));
-        holder.setText(R.id.tv_total_water, datas.get(position).getWellTotalWater());
+        int userRole = (int) SPUtils.getInstance().get(Constants.USERROLE, 0);
+        if (userRole == 0){
+            total.setText(datas.get(position).getOneTotalWater());
+        } else{
+            total.setTextColor(local.getTextColors());
+            if (datas.get(position).getWellTotalWaterThreshold().equals("2"))
+                total.setTextColor(context.getResources().getColor(R.color.red));
+            total.setText(datas.get(position).getWellTotalWater());
+        }
     }
 
-    public void setUserOnlineState(boolean userOnlineState) {
-        this.userOnlineState = userOnlineState;
-    }
+//    public void setUserOnlineState(boolean userOnlineState) {
+//        this.userOnlineState = userOnlineState;
+//    }
 }

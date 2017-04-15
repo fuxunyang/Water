@@ -311,6 +311,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             jumpActivity(MainActivity.this, BalanceActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_006))) {
             jumpActivity(MainActivity.this, BindCardActivity.class);
+        } else if (v.getTag().equals(getString(R.string.lable_007))) {
+            jumpActivity(MainActivity.this, AgricultureActivity.class);
         }
     }
 }

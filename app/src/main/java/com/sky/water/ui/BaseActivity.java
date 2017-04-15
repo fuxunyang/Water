@@ -15,11 +15,12 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.sky.utils.NetworkJudgment;
+import com.sky.utils.SPUtils;
 import com.sky.water.R;
 import com.sky.water.api.IBase;
 import com.sky.water.common.Constants;
 import com.sky.water.ui.dialog.DialogManager;
-import com.sky.water.utils.SPUtils;
+import com.sky.water.utils.ProjectManager;
 import com.sky.water.utils.ToastUtils;
 import com.sky.water.utils.UIHandler;
 
@@ -89,6 +90,7 @@ public class BaseActivity extends AppCompatActivity implements IBase, Toolbar.On
                 leftOnClick();
             }
         });
+        ProjectManager.select(this);
     }
 
     /**
@@ -132,6 +134,7 @@ public class BaseActivity extends AppCompatActivity implements IBase, Toolbar.On
     }
 
     //toolbar部分完
+
     /**
      * 跳转activity，并定义跳转动画
      *
@@ -182,7 +185,7 @@ public class BaseActivity extends AppCompatActivity implements IBase, Toolbar.On
 
     @Override
     public String getUserName() {
-        return (String) SPUtils.get(this, Constants.USERNAME, "");
+        return (String) SPUtils.getInstance().get(Constants.USERNAME, "");
     }
 
     @Override
@@ -197,12 +200,12 @@ public class BaseActivity extends AppCompatActivity implements IBase, Toolbar.On
 
     @Override
     public boolean getUserOnlineState() {
-        return (boolean) SPUtils.get(this, Constants.ISONLINE, false);
+        return (boolean) SPUtils.getInstance().get(Constants.ISONLINE, false);
     }
 
     @Override
     public void setUserOnlineState(boolean isOnline) {
-        SPUtils.put(this, Constants.ISONLINE, true);
+        SPUtils.getInstance().put(Constants.ISONLINE, true);
     }
 
     /**

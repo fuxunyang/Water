@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.sky.utils.JumpAct;
+import com.sky.utils.SPUtils;
 import com.sky.utils.TextUtil;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
@@ -21,7 +22,6 @@ import com.sky.water.ui.BaseActivity;
 import com.sky.water.ui.dialog.AreaPop;
 import com.sky.water.ui.dialog.BasePop;
 import com.sky.water.utils.RegexUtils;
-import com.sky.water.utils.SPUtils;
 import com.sky.water.utils.ScreenUtils;
 import com.sky.water.utils.http.HttpDataUtils;
 
@@ -245,7 +245,7 @@ public class RegisterActivity extends BaseActivity {
             public void onSuccessData(User data) {
                 showToast(getString(R.string.success));
                 setUserOnlineState(true);
-                SPUtils.put(RegisterActivity.this, SPUtils.getValue(data));
+                SPUtils.getInstance().put(SPUtils.getInstance().getValue(data));
                 if (data.getUserRole() == 1)
                     JumpAct.jumpActivity(RegisterActivity.this, MainActivity.class);
                 else

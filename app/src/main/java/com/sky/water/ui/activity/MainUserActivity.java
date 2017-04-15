@@ -43,17 +43,7 @@ public class MainUserActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setToolbar();
         setLeftButton(-1);
-
         checkUpdate();
-        //CPU：1700x
-        //主板：华硕X370-pro
-        //内存：海盗船 LED 3200 8GX2  白光
-        //显卡：AMD470 480
-        //固态：浦科特 M7G 256G
-        //散热器：
-        //电源：冰山金蝶GX550
-        //机箱：乔思伯QT03
-
     }
 
     private void checkUpdate() {
