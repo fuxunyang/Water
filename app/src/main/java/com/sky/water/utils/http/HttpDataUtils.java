@@ -60,7 +60,7 @@ public class HttpDataUtils extends HttpUtilsBase {
      * @param pass
      * @param callback
      */
-    public static void login(String name, String pass, final IDataResultImpl<User> callback) {
+    public static void oldlogin(String name, String pass, final IDataResultImpl<User> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/tbFarmerLogin ");
         params.addBodyParameter("userName", name);
         params.addBodyParameter("passWord", pass);
@@ -74,7 +74,7 @@ public class HttpDataUtils extends HttpUtilsBase {
         });
     }
 
-    public static void oldLogin(String name, String pass, final IDataResultImpl<User> callback) {
+    public static void login(String name, String pass, final IDataResultImpl<User> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/ManagerLogin");
         params.addBodyParameter("userName", name);
         params.addBodyParameter("passWord", pass);
@@ -340,8 +340,8 @@ public class HttpDataUtils extends HttpUtilsBase {
      * @return
      */
     public static RequestHandler getWater(String WellNumber, String page, final IDataResultImpl<ApiResponse<List<WaterEntity>>> callback) {
-        RequestParams params = new RequestParams(Constants.BASE_URL + "/GettbMachineWellsCommunicationTotalWaterRecordWellNumber");
-        params.addBodyParameter("WellNumber", WellNumber);
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/GettbMachineWellsCommunicationTotalWaterRecord");
+        params.addBodyParameter("cardNO", WellNumber);
         params.addBodyParameter("page", page);
         params.setCharset("gbk");
 //        params.addHeader();

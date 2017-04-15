@@ -39,7 +39,7 @@ public class User implements Serializable {
     private String IdentityCard;
     private String IPhone;
     private boolean IsAuditing;
-    private int AreaId;
+    private int AreaID;
     private String RegisterTime;
     private int UserRole;
     private String AreaName;
@@ -180,12 +180,12 @@ public class User implements Serializable {
         this.IsAuditing = IsAuditing;
     }
 
-    public int getAreaId() {
-        return AreaId;
+    public int getAreaID() {
+        return AreaID;
     }
 
-    public void setAreaId(int AreaId) {
-        this.AreaId = AreaId;
+    public void setAreaID(int AreaID) {
+        this.AreaID = AreaID;
     }
 
     public String getRegisterTime() {

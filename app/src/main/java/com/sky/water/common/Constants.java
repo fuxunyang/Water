@@ -15,7 +15,7 @@ public class Constants {
 
     public static final String ID="iD";
     public static final String TRUENAME ="trueName";
-    public static final String AREAID ="areaId";
+    public static final String AREAID ="areaID";
     public static final String USERNAME ="userName";
     public static final String PHNo="pHNo";
     public static final String NAME ="name";

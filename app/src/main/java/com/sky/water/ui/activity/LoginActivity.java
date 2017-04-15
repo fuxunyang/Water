@@ -37,9 +37,9 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (BuildConfig.DEBUG) {
-            et_name.setText("fuxy");
+            et_name.setText("a1");
 //            et_name.setText("a1");
-            et_pass.setText("1");
+            et_pass.setText("a1");
         }
         ActivityLifecycle.getInstance().keepCurrentActivity();
     }

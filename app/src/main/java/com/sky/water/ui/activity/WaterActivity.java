@@ -155,7 +155,7 @@ public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.On
 //            return;
 //        }
         showLoading();
-        HttpDataUtils.getIrrigationWaters(card, page + "", new IDataResultImpl<ApiResponse<List<WaterEntity>>>() {
+        HttpDataUtils.getWater(card, page + "", new IDataResultImpl<ApiResponse<List<WaterEntity>>>() {
             @Override
             public void onSuccessData(ApiResponse<List<WaterEntity>> data) {
                 hideLoading();
