@@ -125,20 +125,21 @@ public class BindCardActivity extends BaseActivity {
     @Event(R.id.bt_bind)
     private void onClick(View view) {
         final String card = TextUtil.getText(edCard);
-        if (TextUtil.notNull(card, "卡号")) return;
-        final String treaName = (String) SPUtils.getInstance().get(Constants.TrueName, "");
-        final String areaId = (String) SPUtils.getInstance().get(Constants.AreaID, "");
+        if (TextUtil.notNull(card, "卡号不能为空")) return;
+        final String treaName = (String) SPUtils.getInstance().get(Constants.TRUENAME, "");
+        final int areaId = (int) SPUtils.getInstance().get(Constants.AREAID, -1);
 
-        if (treaName == null || treaName.length() == 0 || areaId == null || areaId.length() == 0) {
-            showToast("请先登录");
+       if (TextUtil.notNull(treaName,"未实名认证"))return;
+        if (areaId == -1) {
+            showToast("未选择城镇地区");
             return;
         }
         //卡号是否存在
-        HttpDataUtils.tbMachineWellsCommunicationNoExists(treaName, areaId, card, new IDataResultImpl<String>() {
+        HttpDataUtils.tbMachineWellsCommunicationNoExists(treaName, areaId+"", card, new IDataResultImpl<String>() {
             @Override
             public void onSuccessData(String data) {
                 if (data.contains("true")) {
-                    isBind(card, treaName, areaId);
+                    isBind(card, treaName, areaId+"");
                 } else {
                     showToast("卡号不存在");
                 }

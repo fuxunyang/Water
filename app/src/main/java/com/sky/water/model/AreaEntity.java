@@ -13,20 +13,20 @@ public class AreaEntity implements Serializable {
 //            "ID": 28,
 //            "ParentId": 2,
 //            "Code": "JXC001",
-//            "Name": "西草场村",
+//            "NAME": "西草场村",
 //            "AreaLevel": "村",
 //            "Status": 1,
-//            "ParentName": "邦均镇"
+//            "PARENTNAME": "邦均镇"
 
 //    "ZhenID": 2,
 //            "ZhenName": "邦均镇",
 //            "ID": 2,
 //            "ParentId": 1,
 //            "Code": "JXZ001",
-//            "Name": "邦均镇",
+//            "NAME": "邦均镇",
 //            "AreaLevel": "乡镇",
 //            "Status": 1,
-//            "ParentName": "蓟县"
+//            "PARENTNAME": "蓟县"
     private int ID;
     private int ParentId;
     private String Code;

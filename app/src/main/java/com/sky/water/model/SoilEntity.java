@@ -26,7 +26,7 @@ public class SoilEntity implements Serializable {
     private String Name;
     //        private String AreaLevel;
 //        private int Status;
-//        private String ParentName;
+//        private String PARENTNAME;
     private String ID;
     //        private String JingWater;
 //        private String DongWater;

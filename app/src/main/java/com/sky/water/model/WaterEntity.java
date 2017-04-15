@@ -23,7 +23,7 @@ public class WaterEntity implements Serializable {
 //    private int RemoveFlag;
 //    private String WaterFlag;
 //    private String CardNumber;
-//    private String ParentName;
+//    private String PARENTNAME;
 //    private int R;
     private String WellTotalWaterThreshold;
     //    private Object Coordinate;

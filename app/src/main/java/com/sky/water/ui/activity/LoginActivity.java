@@ -101,9 +101,4 @@ public class LoginActivity extends BaseActivity {
         }
         return super.onTouchEvent(event);
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
 }

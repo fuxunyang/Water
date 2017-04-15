@@ -7,27 +7,10 @@ import java.io.Serializable;
  */
 
 public class User implements Serializable {
-//    "ID": 1,
-//            "TrueName": "村委会",
-//            "UserID": "1",
-//            "UserName": "1",
-//            "Pwd": "1",
-//            "AreaID": 460,
-//            "PHNo": "1234567890",
-//            "ZhenID": 17,
-//            "ZhenName": "东二营",
-//            "ParentId": 17,
-//            "Code": "JXC433",
-//            "Name": "西晋贡坨村",
-//            "AreaLevel": "村",
-//            "Status": 1,
-//            "ParentName": "东二营"
-
     private String ID;
     private String TrueName;
     private String UserID;
     private String UserName;
-    private String AreaID;
     private String PHNo;
     private String ZhenID;
     private String ZhenName;
@@ -91,14 +74,6 @@ public class User implements Serializable {
 
     public void setUserName(String UserName) {
         this.UserName = UserName;
-    }
-
-    public String getAreaID() {
-        return AreaID;
-    }
-
-    public void setAreaID(String AreaID) {
-        this.AreaID = AreaID;
     }
 
     public String getPHNo() {

@@ -105,9 +105,9 @@ public class RegisterActivity extends BaseActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 final String zhanghao = TextUtil.getText(et_account);
-                if (TextUtil.notNull(zhanghao, "用户账号")) return;
+                if (TextUtil.notNull(zhanghao, "用户账号不能为空")) return;
                 //是否存在 true存在false不存在
-                HttpDataUtils.tbAppUsersGetList("UserName=" + "'" + zhanghao + "'", new IDataResultImpl<Boolean>() {
+                HttpDataUtils.tbAppUsersGetList("USERNAME=" + "'" + zhanghao + "'", new IDataResultImpl<Boolean>() {
                     @Override
                     public void onSuccessData(Boolean data) {
                         isZhangHao = data;
@@ -167,12 +167,12 @@ public class RegisterActivity extends BaseActivity {
     @Event(R.id.bt_register)
     private void registonClick(View view) {
         final String name = TextUtil.getText(etReal);
-        if (TextUtil.notNull(name, "姓名")) return;
+        if (TextUtil.notNull(name, "姓名不能为空")) return;
 //        if (RegexUtils.isChinese(name)){
 //            showToast("姓名必须为汉字");return;
 //        }
         final String card = TextUtil.getText(et_card);
-        if (TextUtil.notNull(card, "身份证号")) return;
+        if (TextUtil.notNull(card, "身份证号不能为空")) return;
         if (card.length() != 18) {
             showToast("身份证号位数不正确");
         }
@@ -181,7 +181,7 @@ public class RegisterActivity extends BaseActivity {
             return;
         }
         final String zhanghao = TextUtil.getText(et_account);
-        if (TextUtil.notNull(zhanghao, "用户账号")) return;
+        if (TextUtil.notNull(zhanghao, "用户账号不能为空")) return;
         if (!RegexUtils.isIdentifier(zhanghao)) {
             showToast("账号为字母数字下滑线的构成");
             return;
@@ -192,7 +192,7 @@ public class RegisterActivity extends BaseActivity {
         }
 
         final String phone = TextUtil.getText(et_phone);
-        if (TextUtil.notNull(phone, "手机号")) return;
+        if (TextUtil.notNull(phone, "手机号不能为空")) return;
         if (!RegexUtils.isChinesePhoneNumber(phone)) {
             showToast("手机格式不正确");
             return;
@@ -203,9 +203,9 @@ public class RegisterActivity extends BaseActivity {
         }
 
         final String pass1 = TextUtil.getText(et_pass1);
-        if (TextUtil.notNull(pass1, "密码")) return;
+        if (TextUtil.notNull(pass1, "密码不能为空")) return;
         String pass2 = TextUtil.getText(et_pass2);
-        if (TextUtil.notNull(pass2, "确认密码")) return;
+        if (TextUtil.notNull(pass2, "确认密码不能为空")) return;
         if (pass1.length() != 6 || pass2.length() != 6) {
             showToast("密码长度为6位");
             return;

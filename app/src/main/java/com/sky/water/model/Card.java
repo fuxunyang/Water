@@ -10,11 +10,11 @@ public class Card implements Serializable {
 
 
     /**
-     * TrueName : 哦哦
+     * TRUENAME : 哦哦
      * UserID : 120199901011818
-     * UserName : zs
+     * USERNAME : zs
      * Pwd : zs
-     * AreaID : 1
+     * AREAID : 1
      * PHNo : 13802278893
      * RemoveFlag : 0
      * NoAreaID : 460

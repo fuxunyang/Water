@@ -65,10 +65,10 @@ public class UserActivity extends BaseActivity {
     }
 
     private void setText() {
-        etReal.setText((String) SPUtils.getInstance().get(Constants.TrueName, ""));
-        et_nick.setText((String) SPUtils.getInstance().get(Constants.UserName, ""));
-        et_xiangzhen.setText((String) SPUtils.getInstance().get(Constants.ParentName, ""));
-        et_cunzhuang.setText((String) SPUtils.getInstance().get(Constants.Name, ""));
+        etReal.setText((String) SPUtils.getInstance().get(Constants.TRUENAME, ""));
+        et_nick.setText((String) SPUtils.getInstance().get(Constants.USERNAME, ""));
+        et_xiangzhen.setText((String) SPUtils.getInstance().get(Constants.PARENTNAME, ""));
+        et_cunzhuang.setText((String) SPUtils.getInstance().get(Constants.NAME, ""));
         et_phone.setText((String) SPUtils.getInstance().get(Constants.PHNo, ""));
     }
 

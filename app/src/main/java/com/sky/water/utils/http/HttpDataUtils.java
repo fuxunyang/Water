@@ -122,11 +122,11 @@ public class HttpDataUtils extends HttpUtilsBase {
                                      String Pwd, String AreaID, String PHNo,
                                      final IDataResultImpl<String> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersAdd");
-        params.addBodyParameter("TrueName", TrueName);
+        params.addBodyParameter("TRUENAME", TrueName);
         params.addBodyParameter("UserID", UserID);
-        params.addBodyParameter("UserName", UserName);
+        params.addBodyParameter("USERNAME", UserName);
         params.addBodyParameter("Pwd", Pwd);
-        params.addBodyParameter("AreaID", AreaID);
+        params.addBodyParameter("AREAID", AreaID);
         params.addBodyParameter("PHNo", PHNo);
 //        params.setCharset("gbk");
         x.http().post(params, new RequestCallBack<String>(callback) {
@@ -560,7 +560,7 @@ public class HttpDataUtils extends HttpUtilsBase {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/tbMachineWellsCommunicationNoExists");
         params.setCharset("gbk");
         params.addBodyParameter("MachineName", MachineName);
-        params.addBodyParameter("AreaID", AreaID);
+        params.addBodyParameter("AREAID", AreaID);
         params.addBodyParameter("MachineNo", MachineNo);
 //        params.addHeader();
         // 请求
@@ -597,8 +597,8 @@ public class HttpDataUtils extends HttpUtilsBase {
             , final IDataResultImpl<String> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExExistsName");
         params.setCharset("gbk");
-        params.addBodyParameter("TrueName", TrueName);
-        params.addBodyParameter("AreaID", AreaID);
+        params.addBodyParameter("TRUENAME", TrueName);
+        params.addBodyParameter("AREAID", AreaID);
         params.addBodyParameter("MachineNo", MachineNo);
 //        params.addHeader();
         // 请求
