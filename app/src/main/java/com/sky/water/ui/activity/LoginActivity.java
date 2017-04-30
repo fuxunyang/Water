@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.sky.utils.ActivityLifecycle;
 import com.sky.utils.JumpAct;
+import com.sky.utils.LogUtils;
 import com.sky.utils.SPUtils;
 import com.sky.water.BuildConfig;
 import com.sky.water.R;
@@ -16,6 +17,7 @@ import com.sky.water.model.User;
 import com.sky.water.ui.BaseActivity;
 import com.sky.water.utils.http.HttpDataUtils;
 
+import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
 import org.xutils.view.annotation.ViewInject;
@@ -69,6 +71,13 @@ public class LoginActivity extends BaseActivity {
                 else
                     JumpAct.jumpActivity(LoginActivity.this, MainUserActivity.class);
                 finish();
+            }
+
+            @Override
+            public void onFailure(HttpException exception, int code) {
+                super.onFailure(exception, code);
+                LogUtils.i(code+"");
+
             }
         });
     }

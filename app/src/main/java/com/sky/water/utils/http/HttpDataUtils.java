@@ -82,7 +82,7 @@ public class HttpDataUtils extends HttpUtilsBase {
         x.http().post(params, new RequestCallBack<ApiResponse<List<User>>>(callback) {
             @Override
             public void onSuccess(ApiResponse<List<User>> result) {
-                if (result != null) callback.onSuccessData(result.getRows().get(0));
+                if (result != null&&result.getRows().size()!=0) callback.onSuccessData(result.getRows().get(0));
                 else callback.onSuccessData(null);
             }
         });
@@ -353,7 +353,6 @@ public class HttpDataUtils extends HttpUtilsBase {
                         if (result != null) callback.onSuccessData(result);
                         else callback.onSuccessData(null);
                     }
-
                 });
         // 处理handler
         RequestHandler handler = new RequestHandler() {

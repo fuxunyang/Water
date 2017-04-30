@@ -268,6 +268,8 @@ public class RegisterActivity extends BaseActivity {
                 }
                 et_xiangzhen.setText(data.get(0).getName());
                 areaID = data.get(0).getID() + "";
+                et_cunzhuang.setText("");
+                cunID = "";
                 createAreaShowFloder(data);
                 if (!areaPop.isShowing())
                     areaPop.showAtLocation(getWindow().getDecorView(), Gravity.CENTER, 0, 0);

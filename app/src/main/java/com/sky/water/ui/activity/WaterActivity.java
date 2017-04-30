@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -144,7 +145,7 @@ public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.On
     private void searchOnClick(View view) {
         if (cardPop == null) getCard();
         else if (!cardPop.isShowing())
-            cardPop.showAsDropDown(tv_card);
+            cardPop.showAtLocation(tv_card, Gravity.CENTER,0,(int) (ScreenUtils.getStatusHeight(this) + tv_card.getY() + tv_card.getHeight()));
     }
 
 
