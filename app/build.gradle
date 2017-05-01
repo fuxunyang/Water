@@ -55,5 +55,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.4.0'
     compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.sky:apiutils:1.1.23'
+    compile 'com.sky:apiutils:1.1.27'
 }
