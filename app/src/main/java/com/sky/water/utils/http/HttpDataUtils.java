@@ -82,7 +82,8 @@ public class HttpDataUtils extends HttpUtilsBase {
         x.http().post(params, new RequestCallBack<ApiResponse<List<User>>>(callback) {
             @Override
             public void onSuccess(ApiResponse<List<User>> result) {
-                if (result != null&&result.getRows().size()!=0) callback.onSuccessData(result.getRows().get(0));
+                if (result != null && result.getRows().size() != 0)
+                    callback.onSuccessData(result.getRows().get(0));
                 else callback.onSuccessData(null);
             }
         });
@@ -521,7 +522,7 @@ public class HttpDataUtils extends HttpUtilsBase {
      * @return
      */
     public static RequestHandler tbAppUsersExGetListByAppUsersID(String AppUsersID, final IDataResultImpl<List<Card>> callback) {
-        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetListByAppUsersID ");
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbAppUsersExGetListByAppUsersID");
         params.setCharset("gbk");
         params.addBodyParameter("AppUsersID", AppUsersID);
         // 请求
@@ -671,6 +672,31 @@ public class HttpDataUtils extends HttpUtilsBase {
                 new RequestCallBack<String>(callback) {
                     @Override
                     public void onSuccess(String result) {
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    public static RequestHandler tbNewPushBTGetList(String title,int page, final IDataResultImpl<ApiResponse<List<NewsEntity>>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/tbNewPushBTGetList");
+        params.setCharset("gbk");
+        params.addBodyParameter("newsTitle",title);
+        params.addBodyParameter("page", String.valueOf(page));
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<ApiResponse<List<NewsEntity>>>(callback) {
+                    @Override
+                    public void onSuccess(ApiResponse<List<NewsEntity>> result) {
                         if (result != null) callback.onSuccessData(result);
                         else callback.onSuccessData(null);
                     }

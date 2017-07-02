@@ -45,10 +45,10 @@ public class NewsFragment extends BaseFragment {
     @ViewInject(R.id.id_Group_point)
     private LinearLayout group_point;
 
-    @ViewInject(R.id.xList_cqd)
+    @ViewInject(R.id.recycle)
     private MyRecycleView recyclerView;
 
-    @ViewInject(R.id.swip_refresh)
+    @ViewInject(R.id.swipe)
     private SwipeRefreshLayout swipe;
     private MainAdapter adapter;
 

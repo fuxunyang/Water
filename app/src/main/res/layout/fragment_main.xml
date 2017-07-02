@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:sky="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/swip_refresh"
+    android:id="@+id/swipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white">
@@ -40,7 +40,7 @@
             <include layout="@layout/recycle_head" />
 
             <com.sky.water.ui.widget.MyRecycleView
-                android:id="@+id/xList_cqd"
+                android:id="@+id/recycle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
