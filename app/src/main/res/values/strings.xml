@@ -78,6 +78,8 @@
     <string name="register_cunzhuang">所属村庄：</string>
     <string name="register_phone">手机号码：</string>
     <string name="bindcard">绑定卡号</string>
+    <string name="lable_008">机井预警</string>
+    <string name="lable_04_1">机井预警</string>
 
 
 </resources>

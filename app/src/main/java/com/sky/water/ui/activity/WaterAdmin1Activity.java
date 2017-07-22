@@ -41,7 +41,7 @@ import java.util.List;
  * @date 16/1/21 下午4:32
  */
 @ContentView(R.layout.activity_wateradmin)
-public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class WaterAdmin1Activity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @ViewInject(R.id.tv_area)
     private TextView tv_area;
@@ -49,6 +49,9 @@ public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayo
     private TextView tv_cun;
     @ViewInject(R.id.tv_well)
     private EditText tvWell;
+
+    @ViewInject(R.id.tv_cunname)
+    private TextView cunName;
 
     @ViewInject(R.id.swipe)//下拉刷新的框架
     private SwipeRefreshLayout swipe;
@@ -72,6 +75,7 @@ public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayo
         setToolbar();
         toRefresh();
         getArea();
+        cunName.setText("所属村庄");
     }
 
     /**
@@ -175,7 +179,7 @@ public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayo
         if (TextUtil.notNull(areaID, "请选择区域")) return;
 //        if (TextUtil.notNull(well, "请填写机井编号")) return;
         showLoading();
-        HttpDataUtils.getWaterAdmin(areaID, cunID, well, page + "", new IDataResultImpl<ApiResponse<List<WaterEntity>>>() {
+        HttpDataUtils.getWaterAdminError(areaID, cunID, well, page + "", new IDataResultImpl<ApiResponse<List<WaterEntity>>>() {
             @Override
             public void onSuccessData(ApiResponse<List<WaterEntity>> data) {
                 hideLoading();
@@ -292,7 +296,7 @@ public class WaterAdminActivity extends BaseActivity implements SwipeRefreshLayo
         int[] wh = ScreenUtils.getWidthAndHeight(this);
         if (cunPop == null)
             cunPop = new AreaPop(LayoutInflater.from(this).inflate(R.layout.adapter_area, null),
-                    wh[0],wh[1]);
+                    wh[0], wh[1]);
         cunPop.setDatas(datas);
         cunPop.setOnItemClickListener(new BasePop.OnItemClickListener() {
             @Override

@@ -16,6 +16,7 @@
         android:weightSum="2">
 
         <RelativeLayout
+            android:id="@+id/layout01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_16"
@@ -27,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:paddingRight="@dimen/padding_4"
-                android:text="所属区域"
+                android:text="所属乡镇"
                 android:textSize="@dimen/medium" />
 
             <TextView
@@ -52,6 +53,46 @@
                 android:background="@color/black"
                 android:src="@mipmap/ic_menu_trangle_down" />
         </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/layout02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_16"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/tv003"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingRight="@dimen/padding_4"
+                android:text="所属村庄"
+                android:textSize="@dimen/medium" />
+
+            <TextView
+                android:id="@+id/tv_cun"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv003"
+                android:layout_alignTop="@id/tv003"
+                android:layout_toRightOf="@id/tv003"
+                android:background="@color/white"
+                android:gravity="center"
+                android:lines="1" />
+
+
+            <ImageView
+                android:id="@+id/img_down"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/tv003"
+                android:layout_alignTop="@id/tv003"
+                android:layout_toRightOf="@id/tv_cun"
+                android:background="@color/black"
+                android:src="@mipmap/ic_menu_trangle_down" />
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -100,6 +141,7 @@
         sky:showDividers="middle">
 
         <TextView
+            android:id="@+id/tv_cunname"
             style="@style/list_style"
             android:text="@string/list_01" />
 

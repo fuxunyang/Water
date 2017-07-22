@@ -374,9 +374,84 @@ public class HttpDataUtils extends HttpUtilsBase {
      * @param callback
      * @return
      */
-    public static RequestHandler getWaterAdmin(String ParentId, String WellNumber, String page, final IDataResultImpl<ApiResponse<List<WaterEntity>>> callback) {
+    public static RequestHandler getWaterAdmin1(String ParentId, String WellNumber, String page, final IDataResultImpl<ApiResponse<List<WaterEntity>>> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/GettbMachineWellsCommunicationTotalWaterRecordWellNumberBJ");
         params.addBodyParameter("ParentId", ParentId);
+        params.addBodyParameter("WellNumber", WellNumber);
+        params.addBodyParameter("page", page);
+        params.setCharset("gbk");
+//        params.addHeader();
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<ApiResponse<List<WaterEntity>>>(callback) {
+                    @Override
+                    public void onSuccess(ApiResponse<List<WaterEntity>> result) {
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+
+    /**
+     * 获取灌溉水量 管理者 正常
+     *
+     * @param ParentId 所属乡镇ID
+     * @param ParentId 所属村庄ID（空为全部）
+     * @param WellNumber  机井号码
+     * @param page
+     * @param callback
+     * @return
+     */
+    public static RequestHandler getWaterAdmin(String ParentId, String cunId, String WellNumber, String page, final IDataResultImpl<ApiResponse<List<WaterEntity>>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/GettbMachineWellsCommunicationTotalWaterRecordWellNumberBJNormal");
+        params.addBodyParameter("ParentId", ParentId);
+        params.addBodyParameter("AreaID", cunId);
+        params.addBodyParameter("WellNumber", WellNumber);
+        params.addBodyParameter("page", page);
+        params.setCharset("gbk");
+//        params.addHeader();
+        // 请求
+        final Callback.Cancelable request = x.http().post(params,
+                new RequestCallBack<ApiResponse<List<WaterEntity>>>(callback) {
+                    @Override
+                    public void onSuccess(ApiResponse<List<WaterEntity>> result) {
+                        if (result != null) callback.onSuccessData(result);
+                        else callback.onSuccessData(null);
+                    }
+
+                });
+        // 处理handler
+        RequestHandler handler = new RequestHandler() {
+            @Override
+            public void cancel() {
+                request.cancel();
+            }
+        };
+        return handler;
+    }
+/**
+     * 获取灌溉水量 管理者 正常
+     *
+     * @param ParentId 所属乡镇ID
+     * @param ParentId 所属村庄ID（空为全部）
+     * @param WellNumber  机井号码
+     * @param page
+     * @param callback
+     * @return
+     */
+    public static RequestHandler getWaterAdminError(String ParentId, String cunId, String WellNumber, String page, final IDataResultImpl<ApiResponse<List<WaterEntity>>> callback) {
+        RequestParams params = new RequestParams(Constants.BASE_URL + "/GettbMachineWellsCommunicationTotalWaterRecordWellNumberBJError");
+        params.addBodyParameter("ParentId", ParentId);
+        params.addBodyParameter("AreaID", cunId);
         params.addBodyParameter("WellNumber", WellNumber);
         params.addBodyParameter("page", page);
         params.setCharset("gbk");
@@ -687,10 +762,10 @@ public class HttpDataUtils extends HttpUtilsBase {
         return handler;
     }
 
-    public static RequestHandler tbNewPushBTGetList(String title,int page, final IDataResultImpl<ApiResponse<List<NewsEntity>>> callback) {
+    public static RequestHandler tbNewPushBTGetList(String title, int page, final IDataResultImpl<ApiResponse<List<NewsEntity>>> callback) {
         RequestParams params = new RequestParams(Constants.BASE_URL + "/tbNewPushBTGetList");
         params.setCharset("gbk");
-        params.addBodyParameter("newsTitle",title);
+        params.addBodyParameter("newsTitle", title);
         params.addBodyParameter("page", String.valueOf(page));
         // 请求
         final Callback.Cancelable request = x.http().post(params,

@@ -55,16 +55,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @ViewInject(R.id.lable_01)
     private RelativeLayout lable_01;
-    @ViewInject(R.id.lable_02)
-    private RelativeLayout lable_02;
-    @ViewInject(R.id.lable_03)
-    private RelativeLayout lable_03;
-    @ViewInject(R.id.lable_04)
-    private RelativeLayout lable_04;
-    @ViewInject(R.id.lable_05)
-    private RelativeLayout lable_05;
-    @ViewInject(R.id.lable_006)
-    private RelativeLayout lable_006;
+//    @ViewInject(R.id.lable_02)
+//    private RelativeLayout lable_02;
+//    @ViewInject(R.id.lable_03)
+//    private RelativeLayout lable_03;
+//    @ViewInject(R.id.lable_04)
+//    private RelativeLayout lable_04;
+//    @ViewInject(R.id.lable_05)
+//    private RelativeLayout lable_05;
+//    @ViewInject(R.id.lable_006)
+//    private RelativeLayout lable_006;
 
     @ViewInject(R.id.lable_06)
     private RelativeLayout lable_06;
@@ -294,7 +294,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
         if (v.getTag().equals(getString(R.string.lable_01))) {
             slidingMenu.close();
         } else if (v.getTag().equals(getString(R.string.lable_02))) {
@@ -303,6 +302,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             jumpActivity(MainActivity.this, SoilActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_04))) {
             jumpActivity(MainActivity.this, WaterAdminActivity.class);
+        } else if (v.getTag().equals(getString(R.string.lable_04_1))) {
+            jumpActivity(MainActivity.this, WaterAdmin1Activity.class);
         } else if (v.getTag().equals(getString(R.string.lable_05))) {
             jumpActivity(MainActivity.this, BalanceActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_006))) {
