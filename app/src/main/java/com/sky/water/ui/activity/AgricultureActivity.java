@@ -7,11 +7,14 @@ import android.os.Message;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.sky.utils.TextUtil;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
 import com.sky.water.model.ApiResponse;
@@ -21,6 +24,7 @@ import com.sky.water.ui.adapter.MainAdapter;
 import com.sky.water.ui.widget.FullyLinearLayoutManager;
 import com.sky.water.ui.widget.MyRecycleView;
 import com.sky.water.utils.http.HttpDataUtils;
+import com.sky.widget.EditTextDel;
 
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.ViewInject;
@@ -32,6 +36,9 @@ import java.util.List;
  */
 @ContentView(R.layout.activity_agriculture)
 public class AgricultureActivity extends BaseActivity {
+
+    @ViewInject(R.id.edit)
+    private EditTextDel edit;
     @ViewInject(R.id.recycle)
     private MyRecycleView recyclerView;
 
@@ -74,6 +81,24 @@ public class AgricultureActivity extends BaseActivity {
         setToolbar();
         setRefresh();
         getData();
+        edit.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+//                if (s.length() > 0)
+                getData();
+
+            }
+        });
     }
 
     /**
@@ -116,7 +141,8 @@ public class AgricultureActivity extends BaseActivity {
     }
 
     private void getData() {
-        HttpDataUtils.tbNewPushBTGetList("", page, new IDataResultImpl<ApiResponse<List<NewsEntity>>>() {
+        String title = TextUtil.getText(edit);
+        HttpDataUtils.tbNewPushBTGetList(title, page, new IDataResultImpl<ApiResponse<List<NewsEntity>>>() {
             @Override
             public void onSuccessData(ApiResponse<List<NewsEntity>> data) {
                 if (data == null) {

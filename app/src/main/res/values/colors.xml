@@ -20,5 +20,6 @@
     <color name="lightblue">#1499e2</color><!--浅蓝-->
     <color name="chocolate">#D2691E</color>
     <color name="gray">#bbb7b7</color><!--巧可力色 -->
+    <color name="color_99">#999999</color><!--巧可力色 -->
 
 </resources>

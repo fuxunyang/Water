@@ -3,7 +3,7 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/gray"
     android:orientation="vertical">
 
     <include layout="@layout/activity_toolbar" />
@@ -13,10 +13,23 @@
         android:layout_height="wrap_content"
         android:background="@mipmap/ic_nongji" />
 
+    <com.sky.widget.EditTextDel
+        android:id="@+id/edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8"
+        android:background="@drawable/edit_bg"
+        android:gravity="center"
+        android:hint="输入查询关键字"
+        android:padding="@dimen/margin_8"
+        android:textColorHint="@color/color_99"
+        android:textSize="@dimen/small" />
+
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@id/swipe"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <com.sky.water.ui.widget.MyRecycleView
             android:id="@id/recycle"
