@@ -107,7 +107,7 @@
             android:label="@string/lable_007"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.activity.WaterAdmin1Activity"
+            android:name=".ui.activity.WaterAdminErrorActivity"
             android:label="@string/lable_008"
             android:screenOrientation="portrait" />
     </application>

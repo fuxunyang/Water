@@ -41,7 +41,7 @@ import java.util.List;
  * @date 16/1/21 下午4:32
  */
 @ContentView(R.layout.activity_wateradmin)
-public class WaterAdmin1Activity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class WaterAdminErrorActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     @ViewInject(R.id.tv_area)
     private TextView tv_area;

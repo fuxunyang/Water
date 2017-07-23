@@ -303,7 +303,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         } else if (v.getTag().equals(getString(R.string.lable_04))) {
             jumpActivity(MainActivity.this, WaterAdminActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_04_1))) {
-            jumpActivity(MainActivity.this, WaterAdmin1Activity.class);
+            jumpActivity(MainActivity.this, WaterAdminErrorActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_05))) {
             jumpActivity(MainActivity.this, BalanceActivity.class);
         } else if (v.getTag().equals(getString(R.string.lable_006))) {
