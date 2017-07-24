@@ -11,7 +11,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.sky.utils.TextUtil;
@@ -46,10 +45,6 @@ public class AgricultureActivity extends BaseActivity {
     private SwipeRefreshLayout swipe;
     private MainAdapter adapter;
     private int page = 1;//当前新闻页数
-    private int total = 0;//新闻总条数
-    //轮播图数组
-    private int[] images = {R.mipmap.ic_01, R.mipmap.ic_02, R.mipmap.ic_03, R.mipmap.ic_04, R.mipmap.ic_05};
-    private ImageView[] imageViews = new ImageView[100];
     private boolean isRefresh = false;
     Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -153,7 +148,6 @@ public class AgricultureActivity extends BaseActivity {
                     Toast.makeText(AgricultureActivity.this, "已刷新", Toast.LENGTH_SHORT).show();
                     isRefresh = false;
                 }
-                total = data.getTotal();
                 if (page == 1) adapter.setDatas(data.getRows());
                 else adapter.addDatas(data.getRows());
             }

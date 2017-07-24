@@ -9,24 +9,22 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.TypedValue;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.sky.utils.SPUtils;
+import com.sky.utils.TextUtil;
 import com.sky.water.R;
 import com.sky.water.api.IDataResultImpl;
-import com.sky.water.common.Constants;
-import com.sky.water.model.ApiResponse;
-import com.sky.water.model.Card;
+import com.sky.water.model.AreaEntity;
 import com.sky.water.model.WaterEntity;
 import com.sky.water.ui.BaseActivity;
 import com.sky.water.ui.BaseAdapter;
 import com.sky.water.ui.adapter.WaterAdapter;
+import com.sky.water.ui.dialog.AreaPop;
 import com.sky.water.ui.dialog.BasePop;
-import com.sky.water.ui.dialog.CardPop;
 import com.sky.water.utils.ScreenUtils;
 import com.sky.water.utils.http.HttpDataUtils;
 
@@ -41,44 +39,55 @@ import java.util.List;
  * @Description: TODO
  * @date 16/1/21 下午4:32
  */
-@ContentView(R.layout.activity_water)
-public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
+@ContentView(R.layout.activity_wateradmin)
+public abstract class BaseWaterActivity extends BaseActivity implements SwipeRefreshLayout.OnRefreshListener {
 
-    @ViewInject(R.id.tv_card)
-    private TextView tv_card;
+    @ViewInject(R.id.tv_area)
+    protected TextView tv_area;
+    @ViewInject(R.id.tv_cun)
+    protected TextView tv_cun;
+    @ViewInject(R.id.tv_well)
+    protected EditText tvWell;
+
+    @ViewInject(R.id.tv_cunname)
+    protected TextView cunName;
 
     @ViewInject(R.id.swipe)//下拉刷新的框架
-    private SwipeRefreshLayout swipe;
+    protected SwipeRefreshLayout swipe;
     @ViewInject(R.id.recycle)
-    private RecyclerView recyclerView;
-    private LinearLayoutManager mLayoutManager;
-    private WaterAdapter adapter;
-    private int lastVisibleItem;
-    private int total = 0;
-    private int page = 1;
+    protected RecyclerView recyclerView;
+    protected LinearLayoutManager mLayoutManager;
+    protected WaterAdapter adapter;
+    protected int lastVisibleItem;
+    protected int total = 0;
+    protected int page = 1;
+    protected BasePop areaPop;
+    protected List<AreaEntity> areas;
 
-
-    private BasePop cardPop;
-
+    protected String areaID;
+    protected String cunID;
+    protected BasePop cunPop;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbar();
         toRefresh();
-        getCard();
+        createAreaShowFloder();
+        createCunzhuangShowFloder();
+        getArea();
     }
 
     /**
      * 页面刷新
      */
-    private void toRefresh() {
+    protected void toRefresh() {
         //设置swipe的开始位置与结束位置
         swipe.setProgressViewOffset(false, 0, (int) TypedValue
                 .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 80, getResources()
                         .getDisplayMetrics()));
         //为进度圈设置颜色
-        swipe.setColorSchemeColors(R.color.red, R.color.white, R.color.black);
+        swipe.setColorSchemeResources(R.color.red, R.color.white, R.color.black);
         swipe.setEnabled(false);
         swipe.setOnRefreshListener(this);//监听
 
@@ -141,36 +150,37 @@ public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.On
         });
     }
 
-    @Event({R.id.tv_card, R.id.imgbt_search})
+    @Event({R.id.layout01, R.id.layout02})
     private void searchOnClick(View view) {
-        if (cardPop == null) getCard();
-        else if (!cardPop.isShowing())
-            cardPop.showAtLocation(tv_card, Gravity.CENTER,0,(int) (ScreenUtils.getStatusHeight(this) + tv_card.getY() + tv_card.getHeight()));
+        switch (view.getId()) {
+            case R.id.layout01:
+
+                if (areaPop == null) getArea();
+                else if (!areaPop.isShowing())
+                    areaPop.showAsDropDown(tv_area);
+                break;
+            case R.id.layout02:
+                if (!cunPop.isShowing())
+                    cunPop.showAsDropDown(tv_cun);
+                break;
+
+        }
+    }
+
+    @Event(R.id.img_search)
+    private void OnClick(View view) {
+        getData();
     }
 
 
     private void getData() {
-        String card = tv_card.getText().toString().trim();
-//        if (TextUtils.isEmpty(card)) {
-//            showToast("卡号不能为空");
-//            return;
-//        }
-        showLoading();
-        HttpDataUtils.getWater(card, page + "", new IDataResultImpl<ApiResponse<List<WaterEntity>>>() {
-            @Override
-            public void onSuccessData(ApiResponse<List<WaterEntity>> data) {
-                hideLoading();
-                if (data == null) {
-                    showToast(getString(R.string.error_03));
-                    return;
-                }
-                total = data.getTotal();
-                if (page == 1) adapter.setDatas(data.getRows());
-                else adapter.addDatas(data.getRows());
-
-            }
-        });
+        String well = tvWell.getText().toString().trim();
+        if (TextUtil.notNull(areaID, "请选择区域")) return;
+//        if (TextUtil.notNull(well, "请填写机井编号")) return;
+        getWater(well);
     }
+
+    protected abstract void getWater(String well);
 
     @Override
     public void onRefresh() {
@@ -210,41 +220,72 @@ public class WaterActivity extends BaseActivity implements SwipeRefreshLayout.On
                 }).show();
     }
 
-    private void getCard() {
-        String userId = (String) SPUtils.getInstance().get(Constants.ID, "");
-        if (TextUtils.isEmpty(userId)) {
-            showToast("请先登录");
-            return;
-        }
+    private void getArea() {
         showLoading();
-        HttpDataUtils.tbAppUsersExGetListByAppUsersID(userId, new IDataResultImpl<List<Card>>() {
+        HttpDataUtils.getArea(new IDataResultImpl<List<AreaEntity>>() {
             @Override
-            public void onSuccessData(List<Card> data) {
+            public void onSuccessData(List<AreaEntity> data) {
                 hideLoading();
                 if (data == null) {
-                    showToast(getString(R.string.error_04));
+                    showToast(getString(R.string.error_03));
                     return;
                 }
-                tv_card.setText(data.get(0).getMachineNo());
-                createAreaShowFloder(data);
-                if (!cardPop.isShowing()) cardPop.showAsDropDown(tv_card);
+                areas = data;
+                tv_area.setText(data.get(0).getName());
+                areaID = data.get(0).getID() + "";
+                getCunZhuang();
+                areaPop.setDatas(data);
+                if (!areaPop.isShowing())
+                    areaPop.showAsDropDown(tv_area);
             }
         });
     }
 
-    private void createAreaShowFloder(final List<Card> datas) {
-        int[] wh = ScreenUtils.getWidthAndHeight(this);
-        if (cardPop == null)
-            cardPop = new CardPop(LayoutInflater.from(this).inflate(R.layout.adapter_area, null));
-        cardPop.setDatas(datas);
-        cardPop.setOnItemClickListener(new BasePop.OnItemClickListener() {
+    private void createAreaShowFloder() {
+        if (areaPop == null)
+            areaPop = new AreaPop(LayoutInflater.from(this).inflate(R.layout.adapter_area, null));
+        areaPop.setOnItemClickListener(new BasePop.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                Card data = datas.get(position);
-                tv_card.setText(data.getMachineNo());
-                page = 1;
-                getData();
-                cardPop.dismiss();
+                AreaEntity data = (AreaEntity) areaPop.getDatas().get(position);
+                tv_area.setText(data.getName());
+                areaID = data.getID() + "";
+                getCunZhuang();
+                areaPop.dismiss();
+            }
+        });
+    }
+
+    private void getCunZhuang() {
+        if (TextUtils.isEmpty(areaID)) {
+            showToast("请选择城镇");
+            return;
+        }
+        HttpDataUtils.getCunZhuang(areaID, new IDataResultImpl<List<AreaEntity>>() {
+            @Override
+            public void onSuccessData(List<AreaEntity> data) {
+                hideLoading();
+                if (data == null) {
+                    showToast(getString(R.string.error_03));
+                    return;
+                }
+                tv_cun.setText(data.get(0).getName());
+                cunID = data.get(0).getID() + "";
+                cunPop.setDatas(data);
+            }
+        });
+    }
+
+    private void createCunzhuangShowFloder() {
+        if (cunPop == null)
+            cunPop = new AreaPop(LayoutInflater.from(this).inflate(R.layout.adapter_area, null));
+        cunPop.setOnItemClickListener(new BasePop.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                AreaEntity data = (AreaEntity) cunPop.getDatas().get(position);
+                tv_cun.setText(data.getName());
+                cunID = data.getID() + "";
+                cunPop.dismiss();
             }
         });
     }

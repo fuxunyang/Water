@@ -5,4 +5,4 @@
     android:layout_height="match_parent"
     android:background="@drawable/button_bg"
     android:scrollbars="vertical"
-    android:paddingBottom="@dimen/margin_16"/>
+    android:paddingBottom="@dimen/margin_8"/>
