@@ -13,7 +13,7 @@ android {
     buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.sky.water"
-        minSdkVersion 17
+        minSdkVersion 19
         targetSdkVersion 25
         versionCode 4
         versionName "4.0"
@@ -55,5 +55,5 @@ dependencies {
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.squareup.okio:okio:1.4.0'
     compile 'com.android.support:support-v4:25.2.0'
-    compile 'com.sky:apiutils:1.2.27'
+    compile 'com.sky:apiutils:2.2.41'
 }

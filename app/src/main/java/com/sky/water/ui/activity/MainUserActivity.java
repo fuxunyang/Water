@@ -9,14 +9,24 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 
 import com.sky.water.R;
 import com.sky.water.api.IDataResult;
 import com.sky.water.api.IDataResultImpl;
 import com.sky.water.ui.BaseActivity;
+import com.sky.water.ui.dialog.User01Pop;
+import com.sky.water.ui.dialog.User02Pop;
+import com.sky.water.ui.dialog.User03Pop;
 import com.sky.water.utils.http.HttpDataUtils;
 import com.sky.water.utils.http.HttpUtilsBase;
 
@@ -25,6 +35,7 @@ import org.json.JSONObject;
 import org.xutils.ex.HttpException;
 import org.xutils.view.annotation.ContentView;
 import org.xutils.view.annotation.Event;
+import org.xutils.view.annotation.ViewInject;
 
 import java.io.File;
 
@@ -36,7 +47,14 @@ import java.io.File;
 @ContentView(R.layout.activity_mainuser)
 public class MainUserActivity extends BaseActivity {
 
-    public static boolean flag = true;
+    @ViewInject(R.id.layout)
+    private LinearLayout layout;
+    @ViewInject(R.id.lable_06)
+    private RelativeLayout layout06;
+    @ViewInject(R.id.lable_07)
+    private RelativeLayout layout07;
+    @ViewInject(R.id.lable_08)
+    private RelativeLayout layout08;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,21 +196,89 @@ public class MainUserActivity extends BaseActivity {
         }
     }
 
-    @Event({R.id.lable_02, R.id.lable_03, R.id.lable_04, R.id.lable_05, R.id.lable_006, R.id.lable_07})
+    @Event({R.id.lable_06, R.id.lable_07, R.id.lable_08})
     private void tabOnClick(View v) {
-
-        if (v.getTag().equals(getString(R.string.lable_02))) {
-            jumpActivity(MainUserActivity.this, WeatherActivity.class);
-        } else if (v.getTag().equals(getString(R.string.lable_03))) {
-            jumpActivity(MainUserActivity.this, SoilActivity.class);
-        } else if (v.getTag().equals(getString(R.string.lable_04))) {
-            jumpActivity(MainUserActivity.this, WaterActivity.class);
-        } else if (v.getTag().equals(getString(R.string.lable_05))) {
-            jumpActivity(MainUserActivity.this, BalanceActivity.class);
-        } else if (v.getTag().equals(getString(R.string.lable_006))) {
-            jumpActivity(MainUserActivity.this, BindCardActivity.class);
-        } else if (v.getTag().equals(getString(R.string.lable_007))) {
-            jumpActivity(MainUserActivity.this, AgricultureActivity.class);
+        resetAllTabs();
+        switch (v.getId()) {
+            case R.id.lable_06:
+                showSharePopupWindow01(layout06, 0);
+                break;
+            case R.id.lable_07:
+                showSharePopupWindow02(layout07, layout06.getWidth());
+                break;
+            case R.id.lable_08:
+                showSharePopupWindow03(layout08, layout06.getWidth() * 2);
+                break;
         }
+    }
+
+    private void resetAllTabs() {
+        layout06.setBackgroundResource(R.color.white_alpha);
+        layout07.setBackgroundResource(R.color.white_alpha);
+        layout08.setBackgroundResource(R.color.white_alpha);
+    }
+
+    private void showSharePopupWindow01(View view, int left) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        View popView = LayoutInflater.from(this).inflate(R.layout.pop_user01, null);
+        User01Pop pop = new User01Pop(popView, view.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
+        popView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupHeight = popView.getMeasuredHeight();
+
+        backgroundAlpha(0.5f);
+        pop.showAtLocation(view, Gravity.NO_GRAVITY, left, location[1] - popupHeight);
+        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
+        view.setBackgroundResource(R.mipmap.ic_bot_bgpre_06);
+    }
+
+    private void showSharePopupWindow02(View view, int left) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        View popView = LayoutInflater.from(this).inflate(R.layout.pop_user02, null);
+        User02Pop pop = new User02Pop(popView, view.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
+        popView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupWidth = popView.getMeasuredWidth();
+        int popupHeight = popView.getMeasuredHeight();
+        backgroundAlpha(0.5f);
+        pop.showAtLocation(view, Gravity.NO_GRAVITY, left, location[1] - popupHeight);
+        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
+        view.setBackgroundResource(R.mipmap.ic_bot_bgpre_06);
+    }
+
+    private void showSharePopupWindow03(View view, int left) {
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+
+        View popView = LayoutInflater.from(this).inflate(R.layout.pop_user03, null);
+        User03Pop pop = new User03Pop(popView, view.getWidth(), ViewGroup.LayoutParams.WRAP_CONTENT);
+        popView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+        int popupWidth = popView.getMeasuredWidth();
+        int popupHeight = popView.getMeasuredHeight();
+        backgroundAlpha(0.5f);
+        pop.showAtLocation(view, Gravity.NO_GRAVITY, left, location[1] - popupHeight);
+        pop.setOnDismissListener(new PopupWindow.OnDismissListener() {
+            @Override
+            public void onDismiss() {
+                backgroundAlpha(1f);
+            }
+        });
+        view.setBackgroundResource(R.mipmap.ic_bot_bgpre_06);
+    }
+
+    public void backgroundAlpha(float bgAlpha) {
+        WindowManager.LayoutParams lp = getWindow().getAttributes();
+        lp.alpha = bgAlpha; //0.0-1.0
+        getWindow().setAttributes(lp);
     }
 }

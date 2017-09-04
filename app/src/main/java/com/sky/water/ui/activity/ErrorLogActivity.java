@@ -16,7 +16,7 @@ import com.sky.water.ui.BaseActivity;
  */
 public class ErrorLogActivity extends BaseActivity {
     public static void startThis(String errorMsg) {
-        Context context = ActivityLifecycle.getInstance().getCurrentActivity();
+        Context context = ActivityLifecycle.getInstance().getCurrentAct();
         Intent intent = new Intent(context, ErrorLogActivity.class);
         intent.putExtra("errorMsg", errorMsg);
         context.startActivity(intent);

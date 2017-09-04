@@ -13,136 +13,70 @@
         android:layout_height="wrap_content"
         android:src="@mipmap/ic_02" />
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
-        android:orientation="horizontal"
-        android:weightSum="4">
-
-        <RelativeLayout
-            android:id="@+id/lable_02"
-            style="@style/user_layout_style"
-            android:tag="@string/lable_02">
-
-            <ImageView
-                android:id="@+id/lable_02_img"
-                style="@style/menu_image_style"
-                android:background="@mipmap/ic_menu_02" />
-
-            <TextView
-                android:id="@+id/lable_02_tv"
-                style="@style/menu_text_style"
-                android:layout_alignLeft="@+id/lable_02_img"
-                android:layout_alignRight="@+id/lable_02_img"
-                android:layout_below="@+id/lable_02_img"
-                android:text="@string/lable_02" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/lable_03"
-            style="@style/user_layout_style"
-            android:tag="@string/lable_03">
-
-            <ImageView
-                android:id="@+id/lable_03_img"
-                style="@style/menu_image_style"
-                android:background="@mipmap/ic_menu_03" />
-
-            <TextView
-                android:id="@+id/lable_03_tv"
-                style="@style/menu_text_style"
-                android:layout_alignLeft="@+id/lable_03_img"
-                android:layout_alignRight="@+id/lable_03_img"
-                android:layout_below="@+id/lable_03_img"
-                android:text="@string/lable_03" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/lable_04"
-            style="@style/user_layout_style"
-            android:tag="@string/lable_04">
-
-            <ImageView
-                android:id="@+id/lable_04_img"
-                style="@style/menu_image_style"
-                android:background="@mipmap/ic_menu_04" />
-
-            <TextView
-                android:id="@+id/lable_04_tv"
-                style="@style/menu_text_style"
-                android:layout_alignLeft="@+id/lable_04_img"
-                android:layout_alignRight="@+id/lable_04_img"
-                android:layout_below="@+id/lable_04_img"
-                android:text="@string/lable_04" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/lable_05"
-            style="@style/user_layout_style"
-            android:tag="@string/lable_05">
-
-            <ImageView
-                android:id="@+id/lable_05_img"
-                style="@style/menu_image_style"
-                android:background="@mipmap/ic_menu_05" />
-
-            <TextView
-                android:id="@+id/lable_05_tv"
-                style="@style/menu_text_style"
-                android:layout_alignLeft="@+id/lable_05_img"
-                android:layout_alignRight="@+id/lable_05_img"
-                android:layout_below="@+id/lable_05_img"
-                android:text="@string/lable_05" />
-        </RelativeLayout>
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
 
     <LinearLayout
+        android:id="@+id/layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_16"
-        android:orientation="horizontal"
-        android:weightSum="7">
-
+        android:background="@mipmap/ic_bot_bg"
+        android:orientation="horizontal">
 
         <RelativeLayout
-            android:id="@+id/lable_006"
-            style="@style/user_layout_style"
-            android:tag="@string/lable_006">
+            android:id="@+id/lable_06"
+            style="@style/bottom_layout_style">
 
             <ImageView
-                android:id="@+id/lable_006_img"
-                style="@style/menu_image_style"
-                android:background="@mipmap/ic_menu_06" />
+                android:id="@+id/lable_06_img"
+                style="@style/bottom_image_style"
+                android:layout_alignLeft="@+id/lable_06_tv"
+                android:layout_alignRight="@+id/lable_06_tv"
+                android:src="@mipmap/ic_user_01" />
 
             <TextView
                 android:id="@+id/lable_06_tv"
-                style="@style/menu_text_style"
-                android:layout_alignLeft="@+id/lable_006_img"
-                android:layout_alignRight="@+id/lable_006_img"
-                android:layout_below="@+id/lable_006_img"
-                android:text="@string/lable_006" />
-
+                style="@style/bottom_text_style"
+                android:layout_below="@+id/lable_06_img"
+                android:text="农技资讯" />
         </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/lable_07"
-            style="@style/user_layout_style"
-            android:tag="@string/lable_007">
+            style="@style/bottom_layout_style">
 
             <ImageView
                 android:id="@+id/lable_07_img"
-                style="@style/menu_image_style"
-                android:background="@mipmap/ic_menu_07" />
+                style="@style/bottom_image_style"
+                android:layout_alignLeft="@+id/lable_07_tv"
+                android:layout_alignRight="@+id/lable_07_tv"
+                android:src="@mipmap/ic_user_02" />
 
             <TextView
-                android:id="@+id/lable_01_tv"
-                style="@style/menu_text_style"
-                android:layout_alignLeft="@+id/lable_07_img"
-                android:layout_alignRight="@+id/lable_07_img"
+                android:id="@+id/lable_07_tv"
+                style="@style/bottom_text_style"
                 android:layout_below="@+id/lable_07_img"
-                android:text="@string/lable_007" />
+                android:text="农业信息" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/lable_08"
+            style="@style/bottom_layout_style">
+
+            <ImageView
+                android:id="@+id/lable_08_img"
+                style="@style/bottom_image_style"
+                android:layout_alignLeft="@+id/lable_08_tv"
+                android:layout_alignRight="@+id/lable_08_tv"
+                android:src="@mipmap/ic_user_03" />
+
+            <TextView
+                android:id="@+id/lable_08_tv"
+                style="@style/bottom_text_style"
+                android:layout_below="@+id/lable_08_img"
+                android:text="IC卡设置" />
         </RelativeLayout>
     </LinearLayout>
-
 </LinearLayout>
